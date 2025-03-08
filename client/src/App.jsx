@@ -16,7 +16,6 @@ import Contact from "./components/Contactus/contactus";
 import Mentorship from "./components/Mentorships/Mentorship";
 import TestSeries from "./components/Testseries/TestSeries";
 
-
 export default function App() {
   return (
     <Router>
@@ -25,6 +24,7 @@ export default function App() {
 
         <div className="main-content">
 
+          {/* ToastContainer with Tailwind styles */}
           <ToastContainer
             position="top-right"
             autoClose={3000}
@@ -35,6 +35,13 @@ export default function App() {
             draggable
             pauseOnHover
             theme="light"
+            toastClassName={() =>
+              "bg-white text-gray-800 shadow-lg rounded-lg px-4 py-3 border border-gray-300"
+            }
+            bodyClassName={() =>
+              "text-sm font-medium"
+            }
+            progressClassName="bg-blue-500"
           />
 
           <Routes>
@@ -43,11 +50,11 @@ export default function App() {
             <Route path="/products" element={<Products />} />
             <Route path="/register" element={<Register />} />
             <Route path="/checkout" element={<Checkout />} />
-            <Route path='/thankyou' element={<ThankYou />} />
-            <Route path='/contact' element={<Contact />} />
-            <Route path='/aboutus' element={<AboutUs />} />
-            <Route path='/mentorship' element={<Mentorship />} />
-            <Route path='testseries' element={<TestSeries />} />
+            <Route path="/thankyou" element={<ThankYou />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/aboutus" element={<AboutUs />} />
+            <Route path="/mentorship" element={<Mentorship />} />
+            <Route path="/testseries" element={<TestSeries />} />
           </Routes>
 
         </div>

@@ -15,7 +15,9 @@ const ThankYou = () => {
             console.error("Error parsing purchasedCourses from localStorage:", error);
         }
 
-        const timer = setTimeout(() => navigate("/"), 10000);
+        const timer = setTimeout(() => {
+            window.location.href = "/";
+        }, 3000);
 
         return () => clearTimeout(timer);
     }, [navigate]);
@@ -23,6 +25,7 @@ const ThankYou = () => {
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
             <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md text-center">
+
                 <div className="flex justify-center mb-4">
                     <div className="relative w-16 h-16 bg-green-500 rounded-full flex items-center justify-center">
                         <div className="w-10 h-10 border-4 border-white rounded-full animate-ping absolute"></div>
