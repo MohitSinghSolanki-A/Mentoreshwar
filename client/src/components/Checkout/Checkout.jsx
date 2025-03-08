@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import "./Checkout.css";
 
 const Checkout = () => {
     const navigate = useNavigate();
@@ -29,11 +28,7 @@ const Checkout = () => {
             setLoading(true);
             setError(null);
             const { data } = await axios.get(`${API_BASE_URL}/api/products/${id}`);
-
-            const filteredSubjects = data.subjects.filter(subject => {
-                return selectedSubjects.includes(subject.name);
-            });
-
+            const filteredSubjects = data.subjects.filter(subject => selectedSubjects.includes(subject.name));
             setProduct(data);
             setSelectedSubjectsData(filteredSubjects);
         } catch (error) {
@@ -44,21 +39,15 @@ const Checkout = () => {
         }
     };
 
-    const calculateTotalPrice = () => {
-        return selectedSubjectsData.reduce((total, subject) => total + subject.price, 0);
-
-    };
-    console.log("Calculated Total Price:", calculateTotalPrice());
+    const calculateTotalPrice = () => selectedSubjectsData.reduce((total, subject) => total + subject.price, 0);
 
     const handlePayment = async () => {
         const token = localStorage.getItem("token");
         const userId = localStorage.getItem("userId");
-
         if (!token || !userId) {
             alert("⚠️ Authentication required. Please log in.");
             return;
         }
-
         try {
             const { data } = await axios.post(
                 `${API_BASE_URL}/api/payment/create-order`,
@@ -73,25 +62,16 @@ const Checkout = () => {
                     })),
                     amount: calculateTotalPrice(),
                 },
-                {
-                    headers: { Authorization: `Bearer ${token}` },
-                }
+                { headers: { Authorization: `Bearer ${token}` } }
             );
-            console.log("Order API Response:", data);
-
             if (data.orderId) {
-                const purchasedCourses = JSON.parse(localStorage.getItem("purchasedCourses")) || [];
-                const newPurchase = {
+                localStorage.setItem("purchasedCourses", JSON.stringify([...JSON.parse(localStorage.getItem("purchasedCourses")) || [], {
                     productId: product._id,
                     title: product.title,
                     description: product.description,
                     subjects: selectedSubjectsData,
                     totalAmount: calculateTotalPrice(),
-                };
-
-                localStorage.setItem("purchasedCourses", JSON.stringify([...purchasedCourses, newPurchase]));
-
-                // Proceed to payment
+                }]));
                 handleRazorpay(data.orderId, data.amount, token);
             } else {
                 alert("⚠️ Payment initiation failed. Please try again.");
@@ -102,15 +82,11 @@ const Checkout = () => {
         }
     };
 
-
     const handleRazorpay = (orderId, amount, token) => {
         if (!window.Razorpay) {
             alert("⚠️ Razorpay SDK failed to load. Please refresh and try again.");
             return;
         }
-        const userId = localStorage.getItem("userId");
-        const productIds = [productId];
-
         const options = {
             key: RAZORPAY_KEY_ID,
             amount: amount,
@@ -124,8 +100,8 @@ const Checkout = () => {
                             razorpay_order_id: response.razorpay_order_id,
                             razorpay_payment_id: response.razorpay_payment_id,
                             razorpay_signature: response.razorpay_signature,
-                            userId,
-                            productIds,
+                            userId: localStorage.getItem("userId"),
+                            productIds: [productId],
                             subjects: selectedSubjectsData.map(subject => ({
                                 subjectId: subject._id,
                                 name: subject.name,
@@ -135,7 +111,6 @@ const Checkout = () => {
                         },
                         { headers: { Authorization: `Bearer ${token}` } }
                     );
-
                     if (data.success) {
                         toast("✅ Payment successful! Thank you for your purchase.");
                         navigate("/thankyou");
@@ -149,47 +124,46 @@ const Checkout = () => {
                 }
             },
         };
-
         const rzp = new window.Razorpay(options);
         rzp.open();
     };
 
     return (
-        <div className="home">
-            <div className="checkout-container">
-                <div className="checkout-box">
-                    <h2>Course Checkout</h2>
-                    <div className="course-details">
-                        {loading ? (
-                            <p>Loading product details...</p>
-                        ) : error ? (
-                            <p className="error">❌ {error}</p>
-                        ) : product ? (
-                            <>
-                                <h3>{product.title}</h3>
-                                <p>{product.description}</p>
-                                <h4>Selected Subjects:</h4>
-                                <ul>
-                                    {selectedSubjectsData.length > 0 ? (
-                                        selectedSubjectsData.map(subject => (
-                                            <li key={subject._id}>
-                                                {subject.name} - ₹{subject.price}
-                                            </li>
-                                        ))
-                                    ) : (
-                                        <p>⚠️ No subjects selected.</p>
-                                    )}
-                                </ul>
-                                <h3>Total: ₹{calculateTotalPrice()}</h3>
-                            </>
-                        ) : (
-                            <p>❌ Product not found.</p>
-                        )}
-                        <button className="pay-btn" onClick={handlePayment} disabled={!product || loading || selectedSubjectsData.length === 0}>
+        <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
+            <div className="w-full max-w-2xl bg-white shadow-lg rounded-lg p-6">
+                <h2 className="text-xl font-semibold mb-4">Course Checkout</h2>
+                {loading ? (
+                    <p>Loading product details...</p>
+                ) : error ? (
+                    <p className="text-red-500">❌ {error}</p>
+                ) : product ? (
+                    <>
+                        <h3 className="text-lg font-medium">{product.title}</h3>
+                        <p>{product.description}</p>
+                        <h4 className="mt-4 font-semibold">Selected Subjects:</h4>
+                        <ul className="list-disc ml-5">
+                            {selectedSubjectsData.length > 0 ? (
+                                selectedSubjectsData.map(subject => (
+                                    <li key={subject._id} className="mt-1">
+                                        {subject.name} - ₹{subject.price}
+                                    </li>
+                                ))
+                            ) : (
+                                <p className="text-yellow-500">⚠️ No subjects selected.</p>
+                            )}
+                        </ul>
+                        <h3 className="mt-4 text-lg font-semibold">Total: ₹{calculateTotalPrice()}</h3>
+                        <button
+                            className="mt-4 w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition"
+                            onClick={handlePayment}
+                            disabled={!product || loading || selectedSubjectsData.length === 0}
+                        >
                             Buy Now
                         </button>
-                    </div>
-                </div>
+                    </>
+                ) : (
+                    <p className="text-red-500">❌ Product not found.</p>
+                )}
             </div>
         </div>
     );

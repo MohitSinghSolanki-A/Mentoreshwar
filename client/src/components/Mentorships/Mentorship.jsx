@@ -1,5 +1,4 @@
 import React from "react";
-import "./mentorship.css";
 
 const services = [
     { id: 1, title: "Guidance", description: "Personalized career guidance from experts.", image: "/images/guidance.png" },
@@ -10,18 +9,14 @@ const services = [
 
 const MentorshipServices = () => {
     return (
-        <div className="mentorship-container">
-            <h2 className="mentorship-title">Our Mentorship Services</h2>
-            <div className="mentorship-list">
-                {services.map((service, index) => (
-                    <div key={service.id} className={`service-item ${index % 2 === 0 ? "left" : "right"}`}>
-                        <div className="service-text">
-                            <h3>{service.title}</h3>
-                            <p>{service.description}</p>
-                        </div>
-                        <div className="service-image">
-                            <img src={service.image} alt={service.title} />
-                        </div>
+        <div className="max-w-6xl mx-auto py-12 px-6">
+            <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Our Mentorship Services</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+                {services.map((service) => (
+                    <div key={service.id} className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center text-center">
+                        <img src={service.image} alt={service.title} className="w-24 h-24 object-cover mb-4" />
+                        <h3 className="text-xl font-semibold text-gray-800">{service.title}</h3>
+                        <p className="text-gray-600 mt-2">{service.description}</p>
                     </div>
                 ))}
             </div>
