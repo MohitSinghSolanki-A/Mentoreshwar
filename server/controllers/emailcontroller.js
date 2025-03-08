@@ -1,5 +1,4 @@
 const Contact = require("../models/emailmodel");
-const transporter = require("../middleware/nodemailer");
 const nodemailer = require('nodemailer');
 
 exports.submitContactForm = async (req, res) => {
@@ -12,23 +11,37 @@ exports.submitContactForm = async (req, res) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: process.env.EMAIL_USER, // Your email in .env
-            pass: process.env.EMAIL_PASS  // Your app password
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS
         }
     });
 
-    const mailOptions = {
+    // Email to the user
+    const userMailOptions = {
         from: process.env.EMAIL_USER,
-        to: email, // Dynamic email from frontend
+        to: email,
         subject: "Callback Request Received",
         text: `Hello ${name},\n\nWe have received your callback request. Our team will contact you soon.\n\nPhone: ${phone}\n\nBest Regards,\nYour Company`
     };
 
+    // Email to your company
+    const companyMailOptions = {
+        from: process.env.EMAIL_USER,
+        to: process.env.COMPANY_EMAIL, // Ensure this is defined in your .env
+        subject: "New Callback Request",
+        text: `New callback request received:\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nPlease follow up accordingly.`
+    };
+
     try {
-        await transporter.sendMail(mailOptions);
-        res.json({ message: "Email sent successfully!" });
+        // Send email to user
+        await transporter.sendMail(userMailOptions);
+
+        // Send email to your company
+        await transporter.sendMail(companyMailOptions);
+
+        res.json({ message: "Emails sent successfully!" });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Error sending email" });
+        res.status(500).json({ message: "Error sending emails" });
     }
-}
+};

@@ -2,14 +2,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./Login.css";
-
-
 
 export default function Login() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const [showRegister, setShowRegister] = useState(false); // Track if user exists
+  const [showRegister, setShowRegister] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -17,7 +14,7 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setShowRegister(false); // Reset register button on submit
+    setShowRegister(false);
 
     try {
       const response = await fetch("http://localhost:3001/api/auth/login", {
@@ -50,18 +47,17 @@ export default function Login() {
         }
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
       toast.error("❌ Something went wrong. Try again!", { position: "top-right" });
     }
   };
 
-
   return (
-    <div className="login-container">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <ToastContainer />
-      <div className="login-form">
-        <h2>Login</h2>
-        <form onSubmit={handleSubmit}>
+      <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
+        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Login</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="email"
             name="email"
@@ -69,6 +65,7 @@ export default function Login() {
             value={formData.email}
             onChange={handleChange}
             required
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="password"
@@ -77,12 +74,21 @@ export default function Login() {
             value={formData.password}
             onChange={handleChange}
             required
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <button type="submit">Login</button>
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-200"
+          >
+            Login
+          </button>
         </form>
 
         {showRegister && (
-          <button className="register-btn" onClick={() => navigate("/register")}>
+          <button
+            className="w-full mt-4 bg-gray-600 text-white py-2 rounded-lg hover:bg-gray-700 transition duration-200"
+            onClick={() => navigate("/register")}
+          >
             Register Here
           </button>
         )}
