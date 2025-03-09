@@ -1,12 +1,12 @@
 .feature-container {
   max-width: 1440px;
   width: 100%;
-  padding: 80px 40px;
+  padding: 80px 20px;
   margin: 0 auto;
   /* Centers the container */
 }
 
-.feature-container .col-1 {
+/* .feature-container .col-1 {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -90,4 +90,4 @@
   .feature-points p {
     font-size: 0.8rem;
   }
-}
+} */

@@ -2,30 +2,40 @@ import './Footer.css';
 
 export default function Footer() {
   return (
-    <footer className="footer">
-      <div className="footer-content">
-        <div className="footer-section">
-          <h4>About Us</h4>
-          <p>We are dedicated to providing the best services to our customers.</p>
+    <div className='bg-midnight-800'>
+      <footer className="footer-container px-4 md:px-10 py-6">
+        <div className="flex flex-wrap md:flex-nowrap gap-10 w-full justify-between">
+          <div className="p-5 space-y-3 w-full md:w-auto">
+            <h2 className='text-xl font-[mulish] text-white'>About Us</h2>
+            <p className='text-sm font-[mulish] text-white'>We are dedicated to providing the best services to our customers.</p>
+          </div>
+          <div className="p-5 space-y-3 w-full md:w-auto">
+            <h2 className='text-xl font-[mulish] text-white'>Quick Links</h2>
+            <div className='flex flex-col space-y-3'>
+              <a href="#home" className='text-sm font-[mulish] text-white'>Home</a>
+              <a href="#services" className='text-sm font-[mulish] text-white'>Services</a>
+              <a href="#about" className='text-sm font-[mulish] text-white'>About</a>
+              <a href="#contact" className='text-sm font-[mulish] text-white'>Contact Us</a>
+            </div>
+          </div>
+          <div className="p-5 space-y-3 w-full md:w-auto">
+            <h2 className='text-xl font-[mulish] text-white'>Legal</h2>
+            <p className='text-sm font-[mulish] text-white'>Privacy Policy</p>
+            <p className='text-sm font-[mulish] text-white'>Terms of use</p>
+            <p className='text-sm font-[mulish] text-white'>Refund & Cancellation Policy</p>
+          </div>
+          <div className="p-5 space-y-3 w-full md:w-auto">
+            <h2 className='text-xl font-[mulish] text-white'>Contact Info</h2>
+            <p className='text-sm font-[mulish] text-white'>Email: info@example.com</p>
+            <p className='text-sm font-[mulish] text-white'>Phone: (123) 456-7890</p>
+          </div>
         </div>
-        <div className="footer-section">
-          <h4>Quick Links</h4>
-          <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
+        <div className='h-px w-full bg-gray-700/60 my-4'></div>
+        <div className="p-5 flex flex-col md:flex-row items-center md:justify-between text-white font-[mulish] text-base">
+          <p>&copy; 2024 Your Company. All rights reserved.</p>
+          <p className="mt-2 md:mt-0">Follow us:</p>
         </div>
-        <div className="footer-section">
-          <h4>Contact</h4>
-          <p>Email: info@example.com</p>
-          <p>Phone: (123) 456-7890</p>
-        </div>
-      </div>
-      <div className="footer-bottom">
-        <p>&copy; 2024 Your Company. All rights reserved.</p>
-      </div>
-    </footer>
+      </footer>
+    </div>
   );
 }

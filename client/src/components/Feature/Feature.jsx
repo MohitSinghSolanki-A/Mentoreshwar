@@ -1,45 +1,42 @@
-import React from 'react'
+import React from "react";
 import { FaStopwatch, FaCalendarDays, FaHeadset } from "react-icons/fa6";
 import './Feature.css'
 
-export default function Feature() {
+function Feature({ icon: Icon, title, description }) {
   return (
-    <div className='feature-container'>
-      <div className='col-1'>
-        <h1>Feature</h1>
-      </div>
-      <div className='feature-points'>
-        <div className='col-1'>
-          <div className='content-box'>
-            <span className='icon-box'>
-              <FaStopwatch />
-            </span>
-            <h3>Feature 1</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-              labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex</p>
-          </div>
-        </div>
-        <div className='col-1'>
-          <div className='content-box'>
-            <span className='icon-box'>
-              <FaCalendarDays />
-            </span>
-            <h3>Feature 2</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-              labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex</p>
-          </div>
-        </div>
-        <div className='col-1'>
-          <div className='content-box'>
-            <span className='icon-box'>
-              <FaHeadset />
-            </span>
-            <h3>Feature 3</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-              labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex</p>
-          </div>
-        </div>
+    <div className="content-box p-4">
+      <span className="icon-box">
+        <Icon className="text-2xl" /> {/* Dynamic Icon */}
+      </span>
+      <h3 className="font-[mulish] text-2xl mt-4 font-semibold">{title}</h3>
+      <p className="font-[mulish] text-sm mt-4">{description}</p>
+    </div>
+  );
+}
+
+export default function FeatureSection() {
+  return (
+
+    <div className="feature-container">
+      <h1 className="flex justify-center text-5xl font-bold font-[mulish]">Our Features</h1>
+      <div className="feature-points flex justify-center gap-5 !mt-8">
+        <Feature
+          icon={FaStopwatch}
+          title="Fast Response"
+          description="Get quick and efficient service with minimal wait time."
+        />
+        <Feature
+          icon={FaCalendarDays}
+          title="Scheduled Assistance"
+          description="Book appointments and manage your time effectively."
+        />
+        <Feature
+          icon={FaHeadset}
+          title="24/7 Support"
+          description="Our team is available round the clock to assist you."
+        />
       </div>
     </div>
-  )
-};
+
+  );
+}

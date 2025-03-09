@@ -58,7 +58,7 @@ export default function Navbar() {
   return (
     <>
       <div className={`overlay ${menuOpen ? "show" : ""}`} onClick={() => setMenuOpen(false)}></div>
-      <nav className="navbar">
+      <nav className="navbar !bg-[#e0e0ef]">
         <div className="navbar-container">
           <div className="logo">
             <Link to="/">Mentoreswar</Link>
