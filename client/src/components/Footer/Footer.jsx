@@ -2,7 +2,7 @@ import './Footer.css';
 
 export default function Footer() {
   return (
-    <div className='bg-midnight-800'>
+    <div className='bg-[#0e0e27]'>
       <footer className="footer-container px-4 md:px-10 py-6">
         <div className="flex flex-wrap md:flex-nowrap gap-10 w-full justify-between">
           <div className="p-5 space-y-3 w-full md:w-auto">
