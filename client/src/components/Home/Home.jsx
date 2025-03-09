@@ -15,7 +15,7 @@ export default function Home() {
       <Feature />
       <Mentor />
       <Newsletter />
-      <Helpsection />
+      {/* <Helpsection /> */}
       <Testimonial />
       <FAQ />
     </div>

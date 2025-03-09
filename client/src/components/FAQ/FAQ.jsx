@@ -22,7 +22,7 @@ export default function FAQ() {
       <h2 className="faq-title">Frequently Asked Questions</h2>
       <div className='accordion-drop-down'>
         {faqs.map((faq, index) => (
-          <div key={index} className='accordion-item'>
+          <div key={index} className='mb-6'>
             <div
               onClick={() => toggleAccordion(index)}
               className={`accordion-header ${openIndex === index ? "active" : ""}`}
@@ -39,7 +39,10 @@ export default function FAQ() {
               <span className="icon">{openIndex === index ? <FaCircleChevronUp /> : <FaCircleChevronDown />}</span>
             </div>
             {openIndex === index && (
-              <div className="accordion-content">
+              <div
+                className={`transition-all duration-300 ease-in-out ${openIndex === index ? "max-h-[1000px] p-4" : "max-h-0 overflow-hidden"
+                  }`}
+              >
                 <p>{faq.answer}</p>
               </div>
             )}
