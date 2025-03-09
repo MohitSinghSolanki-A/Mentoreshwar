@@ -15,7 +15,6 @@ const Checkout = () => {
     const [error, setError] = useState(null);
 
     const API_BASE_URL = "http://localhost:3001";
-    const RAZORPAY_KEY_ID = "rzp_test_uBkhaWV8gPaYLF";
 
     useEffect(() => {
         if (productId) {
@@ -88,7 +87,7 @@ const Checkout = () => {
             return;
         }
         const options = {
-            key: RAZORPAY_KEY_ID,
+            key: import.meta.env.VITE_RAZORPAY_KEY,
             amount: amount,
             currency: "INR",
             order_id: orderId,
