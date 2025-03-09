@@ -4,9 +4,9 @@ import './Feature.css'
 
 function Feature({ icon: Icon, title, description }) {
   return (
-    <div className="content-box p-4">
+    <div className="content-box p-4 border-1 rounded-xl !py-10 border-[#b7b7d9]">
       <span className="icon-box">
-        <Icon className="text-2xl" /> {/* Dynamic Icon */}
+        <Icon className="text-2xl text-[#44448e]" /> {/* Dynamic Icon */}
       </span>
       <h3 className="font-[mulish] text-2xl mt-4 font-semibold">{title}</h3>
       <p className="font-[mulish] text-sm mt-4">{description}</p>

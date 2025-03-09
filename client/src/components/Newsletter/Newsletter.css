@@ -44,7 +44,7 @@
     transform: translateY(-10px);
     /* Moves the icon upward */
   }
-}
+} 
 
 .animated-icon .rotation-25 {
   transform: rotate(25deg);
