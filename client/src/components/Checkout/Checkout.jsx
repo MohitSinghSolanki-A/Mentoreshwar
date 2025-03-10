@@ -128,40 +128,45 @@ const Checkout = () => {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
-            <div className="w-full max-w-2xl bg-white shadow-lg rounded-lg p-6">
-                <h2 className="text-xl font-semibold mb-4">Course Checkout</h2>
+        <div className="flex justify-center items-center min-h-screen bg-gray-50 p-6">
+            <div className="w-full max-w-2xl bg-white shadow-2xl rounded-2xl p-8 transition-all hover:shadow-3xl">
+                <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">🛒 Course Checkout</h2>
+
                 {loading ? (
-                    <p>Loading product details...</p>
+                    <p className="text-center text-gray-600">Loading product details...</p>
                 ) : error ? (
-                    <p className="text-red-500">❌ {error}</p>
+                    <p className="text-red-500 text-center font-semibold">❌ {error}</p>
                 ) : product ? (
                     <>
-                        <h3 className="text-lg font-medium">{product.title}</h3>
-                        <p>{product.description}</p>
-                        <h4 className="mt-4 font-semibold">Selected Subjects:</h4>
-                        <ul className="list-disc ml-5">
+                        <h3 className="text-xl font-semibold text-gray-700">{product.title}</h3>
+                        <p className="text-gray-600 mb-4">{product.description}</p>
+
+                        <h4 className="mt-4 font-semibold text-gray-800 border-b pb-2">📚 Selected Subjects:</h4>
+                        <ul className="list-none mt-2">
                             {selectedSubjectsData.length > 0 ? (
                                 selectedSubjectsData.map(subject => (
-                                    <li key={subject._id} className="mt-1">
-                                        {subject.name} - ₹{subject.price}
+                                    <li key={subject._id} className="flex justify-between bg-gray-100 p-2 rounded-md shadow-sm mt-2">
+                                        <span className="text-gray-700">{subject.name}</span>
+                                        <span className="font-medium text-gray-900">₹{subject.price}</span>
                                     </li>
                                 ))
                             ) : (
-                                <p className="text-yellow-500">⚠️ No subjects selected.</p>
+                                <p className="text-yellow-500 font-medium text-center">⚠️ No subjects selected.</p>
                             )}
                         </ul>
-                        <h3 className="mt-4 text-lg font-semibold">Total: ₹{calculateTotalPrice()}</h3>
+
+                        <h3 className="mt-6 text-lg font-bold text-gray-900">💰 Total: ₹{calculateTotalPrice()}</h3>
+
                         <button
-                            className="mt-4 w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition"
+                            className="mt-6 w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white py-3 rounded-lg text-lg font-semibold shadow-md hover:shadow-lg hover:opacity-90 transition-all"
                             onClick={handlePayment}
                             disabled={!product || loading || selectedSubjectsData.length === 0}
                         >
-                            Buy Now
+                            🚀 Buy Now
                         </button>
                     </>
                 ) : (
-                    <p className="text-red-500">❌ Product not found.</p>
+                    <p className="text-red-500 text-center font-semibold">❌ Product not found.</p>
                 )}
             </div>
         </div>

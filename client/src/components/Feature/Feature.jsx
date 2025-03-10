@@ -1,12 +1,12 @@
 import React from "react";
 import { FaStopwatch, FaCalendarDays, FaHeadset } from "react-icons/fa6";
-import './Feature.css'
+import './Feature.css';
 
-function Feature({ icon: Icon, title, description }) {
+function Feature({ icon, title, description }) {
   return (
-    <div className="content-box p-4 border-1 rounded-xl !py-10 border-[#b7b7d9]">
+    <div className="content-box p-4 border rounded-xl py-10 border-[#b7b7d9] text-center">
       <span className="icon-box">
-        <Icon className="text-2xl text-[#44448e]" /> {/* Dynamic Icon */}
+        {React.createElement(icon, { className: "text-4xl text-[#44448e]" })}
       </span>
       <h3 className="font-[mulish] text-2xl mt-4 font-semibold">{title}</h3>
       <p className="font-[mulish] text-sm mt-4">{description}</p>
@@ -16,10 +16,9 @@ function Feature({ icon: Icon, title, description }) {
 
 export default function FeatureSection() {
   return (
-
-    <div className="feature-container">
-      <h1 className="flex justify-center text-5xl font-bold font-[mulish]">Our Features</h1>
-      <div className="feature-points flex justify-center gap-5 !mt-8">
+    <div className="feature-container text-center">
+      <h1 className="text-5xl font-bold font-[mulish]">Our Features</h1>
+      <div className="feature-points flex justify-center gap-5 mt-8">
         <Feature
           icon={FaStopwatch}
           title="Fast Response"
@@ -37,6 +36,5 @@ export default function FeatureSection() {
         />
       </div>
     </div>
-
   );
 }

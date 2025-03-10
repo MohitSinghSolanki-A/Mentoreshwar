@@ -11,7 +11,7 @@ const Contact = () => {
         phone: "",
     });
 
-    const [message, setMessage] = useState("");
+    const [setMessage] = useState("");
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,6 +24,7 @@ const Contact = () => {
             setMessage(response.data.message);
             setFormData({ name: "", email: "", phone: "" });
         } catch (error) {
+            console.log("error", error)
             setMessage("Something went wrong. Please try again.");
         }
     };
