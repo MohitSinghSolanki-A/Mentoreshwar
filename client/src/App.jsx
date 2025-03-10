@@ -53,6 +53,7 @@ export default function App() {
             <Route path="/thankyou" element={<ThankYou />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/aboutus" element={<AboutUs />} />
+            {/* <Route path="/dummy" element={<Dummy />} /> */}
             <Route path="/mentorship" element={<Mentorship />} />
             <Route path="/testseries" element={<TestSeries />} />
           </Routes>

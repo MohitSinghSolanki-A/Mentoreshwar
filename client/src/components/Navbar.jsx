@@ -59,7 +59,7 @@ export default function Navbar() {
   return (
     <>
       <div className={`overlay ${menuOpen ? "show" : ""}`} onClick={() => setMenuOpen(false)}></div>
-      <div className="!bg-[#e0e0ef] w-full fixed">
+      <div className="!bg-[#e0e0ef] w-full fixed z-[999]">
         <nav className="page-main px-5 py-5">
           <div className="navbar-container ">
             <div className="logo">
@@ -77,7 +77,9 @@ export default function Navbar() {
                 <Link to="/mentorship" onClick={() => setMenuOpen(false)}>Mentorships</Link>
                 <Link to="/products" onClick={() => setMenuOpen(false)}>Courses</Link>
                 <Link to="/aboutus">About Us</Link>
+                {/*    */}
                 <Link to="/contact" onClick={() => setMenuOpen(false)}>Contact Us</Link>
+
               </div>
               <div className="nav-auth">
                 {isLoggedIn ? (
