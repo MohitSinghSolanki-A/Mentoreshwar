@@ -8,6 +8,7 @@ const productRoutes = require("./routes/products.js");
 const paymentRoutes = require("./routes/paymentRoutes");
 const emailRoutes = require("./routes/emailroute.js");
 const uploadRoutes = require("./routes/uploadRoutes");
+const jobRoutes = require("./routes/Jobpostroute.js")
 
 
 
@@ -24,7 +25,7 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 
-
+app.use("/api/job", jobRoutes);
 app.use("/api/uploads", uploadRoutes);
 app.use("/api/call", emailRoutes);
 app.use("/api/auth", authRoutes);

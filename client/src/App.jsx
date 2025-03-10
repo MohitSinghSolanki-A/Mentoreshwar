@@ -15,6 +15,8 @@ import AboutUs from "./components/aboutus/AboutUs";
 import Contact from "./components/Contactus/contactus";
 import Mentorship from "./components/Mentorships/Mentorship";
 import TestSeries from "./components/Testseries/TestSeries";
+import JobList from "./components/Job/Jobpost"
+import JobForm from "./components/JobPost/Jobpost"
 
 export default function App() {
   return (
@@ -56,6 +58,8 @@ export default function App() {
             {/* <Route path="/dummy" element={<Dummy />} /> */}
             <Route path="/mentorship" element={<Mentorship />} />
             <Route path="/testseries" element={<TestSeries />} />
+            <Route path="/job" element={<JobList />} />
+            <Route path="/job_post" element={<JobForm />} />
           </Routes>
 
         </div>

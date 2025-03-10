@@ -1,3 +1,17 @@
+.home {
+    min-width: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.mentor-container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0px auto;
+    padding: 80px 120px;
+}
+
+
 .mentorship-container {
     text-align: center;
     padding: 40px 20px;

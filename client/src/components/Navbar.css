@@ -9,7 +9,7 @@
   width: 100%;
   top: 0;
   left: 0;
-  z-index: 999;
+  z-index: 200;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease-in-out;
 }
@@ -44,16 +44,20 @@
 .logo a:hover {
   color: black;
 }
+
 .nav-links {
   display: flex;
   gap: 20px;
 }
+
 .nav-auth {
   margin-left: 20px;
 }
+
 .nav-links li {
   list-style: none;
 }
+
 .nav-links a {
   color: black;
   text-decoration: none;
@@ -61,6 +65,7 @@
   position: relative;
   transition: color 0.3s ease;
 }
+
 .nav-links a::after {
   content: "";
   position: absolute;
@@ -72,22 +77,27 @@
   transition: all 0.3s ease-in-out;
   transform: translateX(-50%);
 }
+
 .nav-links a:hover::after {
   width: 100%;
 }
+
 .nav-links a:hover {
   color: black;
 }
+
 .hamburger {
   font-size: 24px;
   cursor: pointer;
   display: none;
 }
+
 .navmenu {
   display: flex;
   align-items: center;
   gap: 20px;
 }
+
 .login-btn {
   color: black;
   text-decoration: none;
@@ -96,14 +106,15 @@
   border-radius: 100px;
   transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
 }
+
 .login-btn:hover {
   color: white;
   text-decoration: none;
   padding: 10px 20px;
   background: black;
 }
+
 button {
-  background: black;
   color: black;
   border: none;
   padding: 10px 15px;
@@ -118,34 +129,41 @@ button {
   align-items: center;
   gap: 15px;
 }
+
 .icon {
   font-size: 1.3rem;
   cursor: pointer;
   transition: transform 0.3s ease;
 }
+
 .icon:hover {
   transform: scale(1.2);
 }
+
 .hamburger {
   display: none;
   font-size: 1.8rem;
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
 }
+
 .hamburger:hover {
   transform: rotate(90deg);
 }
+
 @media (max-width: 768px) {
   .hamburger {
     display: flexbox;
     align-items: center;
   }
+
   .login-btn {
     color: white;
     border: 1px solid white;
     border-radius: 100px;
     transition: background-color 0.3sease, color 0.3sease, border 0.3sease;
   }
+
   .navmenu {
     position: fixed;
     top: 80px;
@@ -161,10 +179,12 @@ button {
     transform: translateX(-100%);
     transition: transform 0.3s ease-in-out;
   }
+
   .navmenu.open {
     display: flex;
     transform: translateX(0);
   }
+
   .nav-links a {
     color: white;
     text-decoration: none;
@@ -172,6 +192,7 @@ button {
     position: relative;
     transition: color 0.3s ease;
   }
+
   .nav-links {
     flex-direction: column;
     gap: 15px;
@@ -179,12 +200,15 @@ button {
     text-align: left;
     padding: 0 20px;
   }
+
   .nav-auth {
     margin-top: 20px;
   }
+
   body.menu-open {
     overflow: hidden;
   }
+
   .overlay {
     position: sticky;
     top: 0;
@@ -197,13 +221,16 @@ button {
     visibility: hidden;
     transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
   }
+
   .overlay.show {
     opacity: 0.7;
     visibility: visible;
   }
+
   .navmenu {
     display: none;
   }
+
   .navmenu.open {
     display: flex;
 
@@ -225,10 +252,12 @@ button {
   visibility: hidden;
   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 }
+
 .overlay.show {
   opacity: 0.7;
   visibility: visible;
 }
+
 .navbar {
   display: flex;
   justify-content: center;
@@ -244,6 +273,7 @@ button {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease-in-out;
 }
+
 .navbar-container {
   max-width: 1440px;
   width: 100%;
@@ -251,6 +281,7 @@ button {
   justify-content: space-between;
   align-items: center;
 }
+
 .hamburger {
   display: flex;
   align-items: center;
@@ -261,6 +292,7 @@ button {
   height: 40px;
   width: 40px;
 }
+
 .logo a {
   color: black;
   font-size: 1.5rem;
@@ -268,19 +300,24 @@ button {
   font-weight: bold;
   transition: color 0.3s ease;
 }
+
 .logo a:hover {
   color: black;
 }
+
 .nav-links {
   display: flex;
   gap: 20px;
 }
+
 .nav-auth {
   margin-left: 20px;
 }
+
 .nav-links li {
   list-style: none;
 }
+
 .nav-links a {
   color: black;
   text-decoration: none;
@@ -288,6 +325,7 @@ button {
   position: relative;
   transition: color 0.3s ease;
 }
+
 .nav-links a::after {
   content: "";
   position: absolute;
@@ -299,22 +337,27 @@ button {
   transition: all 0.3s ease-in-out;
   transform: translateX(-50%);
 }
+
 .nav-links a:hover::after {
   width: 100%;
 }
+
 .nav-links a:hover {
   color: black;
 }
+
 .hamburger {
   font-size: 24px;
   cursor: pointer;
   display: none;
 }
+
 .navmenu {
   display: flex;
   align-items: center;
   gap: 20px;
 }
+
 .login-btn {
   color: black;
   text-decoration: none;
@@ -323,14 +366,15 @@ button {
   border-radius: 100px;
   transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
 }
+
 .login-btn:hover {
   color: white;
   text-decoration: none;
   padding: 10px 20px;
   background: black;
 }
+
 button {
-  background: black;
   color: black;
   border: none;
   padding: 10px 15px;
@@ -345,34 +389,41 @@ button {
   align-items: center;
   gap: 15px;
 }
+
 .icon {
   font-size: 1.3rem;
   cursor: pointer;
   transition: transform 0.3s ease;
 }
+
 .icon:hover {
   transform: scale(1.2);
 }
+
 .hamburger {
   display: none;
   font-size: 1.8rem;
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
 }
+
 .hamburger:hover {
   transform: rotate(90deg);
 }
+
 @media (max-width: 768px) {
   .hamburger {
     display: flex;
     text-align: center;
   }
+
   .login-btn {
     color: white;
     border: 1px solid white;
     border-radius: 100px;
     transition: background-color 0.3sease, color 0.3sease, border 0.3sease;
   }
+
   .navmenu {
     position: fixed;
     top: 80px;
@@ -388,10 +439,12 @@ button {
     transform: translateX(-100%);
     transition: transform 0.3s ease-in-out;
   }
+
   .navmenu.open {
     display: flex;
     transform: translateX(0);
   }
+
   .nav-links a {
     color: white;
     text-decoration: none;
@@ -399,6 +452,7 @@ button {
     position: relative;
     transition: color 0.3s ease;
   }
+
   .nav-links {
     flex-direction: column;
     gap: 15px;
@@ -406,12 +460,15 @@ button {
     text-align: left;
     padding: 0 20px;
   }
+
   .nav-auth {
     margin-top: 20px;
   }
+
   body.menu-open {
     overflow: hidden;
   }
+
   .overlay {
     position: sticky;
     top: 0;
@@ -424,13 +481,16 @@ button {
     visibility: hidden;
     transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
   }
+
   .overlay.show {
     opacity: 0.7;
     visibility: visible;
   }
+
   .navmenu {
     display: none;
   }
+
   .navmenu.open {
     display: flex;
 
@@ -452,6 +512,7 @@ button {
   visibility: hidden;
   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 }
+
 .overlay.show {
   opacity: 0.7;
   visibility: visible;

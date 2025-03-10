@@ -1,18 +1,7 @@
-.register-container {
-  width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
+.home {
+  min-width: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 80px 20px;
-  /* height: 100vh; */
-  background: var(--background-color);
-}
-
-h2 {
-  color: var(--text-white) !important;
-  font-size: 2rem;
+  flex-direction: column;
 }
 
 

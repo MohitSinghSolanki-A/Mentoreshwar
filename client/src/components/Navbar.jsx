@@ -11,6 +11,7 @@ export default function Navbar() {
   const [hasOrder, setHasOrder] = useState(false);
   const navigate = useNavigate();
 
+  const isSetpostjob = localStorage.getItem("setpostJob") === "true";
   const fetchOrders = async () => {
     try {
       const userId = localStorage.getItem("userId");
@@ -30,12 +31,14 @@ export default function Navbar() {
     }
   };
 
+
+
   useEffect(() => {
     const authStatus = localStorage.getItem("isAuthenticated") === "true";
     setIsLoggedIn(authStatus);
 
     if (authStatus) {
-      fetchOrders(); // Fetch orders only if logged in
+      fetchOrders();
     }
   }, []);
 
@@ -63,7 +66,7 @@ export default function Navbar() {
         <nav className="page-main px-5 py-5">
           <div className="navbar-container ">
             <div className="logo">
-              <Link to="/">Mentoreswar</Link>
+              <Link to="/">Mentoreshwar</Link>
             </div>
             <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
               {menuOpen ? <FaXmark /> : <MdMenu />}
@@ -79,7 +82,10 @@ export default function Navbar() {
                 <Link to="/aboutus">About Us</Link>
                 {/*    */}
                 <Link to="/contact" onClick={() => setMenuOpen(false)}>Contact Us</Link>
-
+                <Link to="/job" onClick={() => setMenuOpen(false)}>Oppurtunities</Link>
+                {isSetpostjob && (
+                  <Link to="/job_post" onClick={() => setMenuOpen(false)}>Post a Job</Link>
+                )}
               </div>
               <div className="nav-auth">
                 {isLoggedIn ? (

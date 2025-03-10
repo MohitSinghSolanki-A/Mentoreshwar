@@ -2,15 +2,12 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./Products.css"; // External CSS only
-import { CartContext } from "../Cart/CartContext"; // Ensure correct import
 
 
 export default function Products() {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [selectedSubjects, setSelectedSubjects] = useState({});
-  // const { addToCart } = useContext(CartContext);
   const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
 
   useEffect(() => {
@@ -37,106 +34,70 @@ export default function Products() {
     });
   };
 
-  // const handleAddToCart = (product) => {
-  //   if (!isAuthenticated) {
-  //     toast.warn("⚠️ Please log in to buy!", { position: "top-right" });
-  //     return;
-  //   } else {
-  //     const selected = selectedSubjects[product._id] || [];
-  //     if (selected.length === 0) {
-  //       toast.warn("⚠️ Please select at least one subject!", { position: "top-right" });
-  //       return;
-  //     }
-
-  //     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  //     const sortedSelected = [...selected].sort();
-
-  //     const existingIndex = cart.findIndex(
-  //       (item) =>
-  //         item.productId === product._id &&
-  //         JSON.stringify(item.subjects) === JSON.stringify(sortedSelected)
-  //     );
-
-  //     if (existingIndex !== -1) {
-  //       toast.info("ℹ️ Already in cart!", { position: "top-right" });
-  //       return;
-  //     }
-
-  //     const totalPrice = product.subjects
-  //       .filter((s) => sortedSelected.includes(s.name))
-  //       .reduce((sum, s) => sum + s.price, 0);
-
-  //     const cartItem = {
-  //       productId: product._id,
-  //       title: product.title,
-  //       subjects: sortedSelected,
-  //       totalPrice,
-  //     };
-
-  //     cart.push(cartItem);
-  //     localStorage.setItem("cart", JSON.stringify(cart));
-  //     toast.success("✅ Added to cart!", { position: "top-right" });
-
-  //     // Update context cart state if necessary
-  //     addToCart(cartItem);
-  //   }
-  // };
-
   const handleBuyNow = (product) => {
     if (!isAuthenticated) {
       toast.warn("⚠️ Please log in to buy!", { position: "top-right" });
       return;
     }
-
     const selected = selectedSubjects[product._id] || [];
     if (selected.length === 0) {
       toast.warn("⚠️ Please select at least one subject!", { position: "top-right" });
       return;
     }
-
     navigate(
       `/checkout?productId=${product._id}&subjects=${encodeURIComponent(selected.join(", "))}`
     );
   };
 
   return (
-    <div className="home">
-      <div className="products-container">
-        <ToastContainer />
-        <h1 className="title">Available Test Series</h1>
-        <div className="products-grid">
+    <div className="pt-24 px-4">
+      <ToastContainer />
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-4xl font-bold text-gray-800 text-center mb-10">
+          Available Test Series
+        </h1>
+        <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {products.map((product) => (
-            <div key={product._id} className="product-card">
-              <div className="product-image-container">
-                <img src={product.imageUrl || "https://via.placeholder.com/300x200"} alt={product.title} className="product-image" />
+            <div
+              key={product._id}
+              className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105 p-5 flex flex-col items-center"
+            >
+              <img
+                src={product.imageUrl || "https://via.placeholder.com/300x200"}
+                alt={product.title}
+                className="w-full h-48 object-cover rounded-xl"
+              />
+              <div className="text-center mt-4">
+                <h3 className="text-xl font-semibold text-gray-900">{product.title}</h3>
+                <p className="text-gray-600 mt-2">{product.description}</p>
               </div>
-              <div className="product-content">
-                <h3 className="product-title">{product.title}</h3>
-                <p className="product-description">{product.description}</p>
-
-                {product.isTestSeries && (
-                  <div className="subjects-container">
-                    <h4 className="subjects-title">Select Subjects:</h4>
+              {product.isTestSeries && (
+                <div className="w-full mt-4">
+                  <h4 className="text-gray-800 font-medium mb-2">Select Subjects:</h4>
+                  <div className="flex flex-wrap gap-2">
                     {product.subjects.map((subject) => (
-                      <div key={subject.name} className="subject-item">
+                      <label
+                        key={subject.name}
+                        className="flex items-center space-x-2 bg-gray-100 px-3 py-2 rounded-lg cursor-pointer"
+                      >
                         <input
                           type="checkbox"
-                          id={`${product._id}-${subject.name}`}
+                          className="w-5 h-5 text-blue-600 focus:ring focus:ring-blue-400"
                           checked={selectedSubjects[product._id]?.includes(subject.name) || false}
                           onChange={() => handleSubjectSelection(product._id, subject)}
                         />
-                        <label htmlFor={`${product._id}-${subject.name}`} className="subject-label">
-                          {subject.name} - ₹{subject.price}
-                        </label>
-                      </div>
+                        <span className="text-gray-700">{subject.name} - ₹{subject.price}</span>
+                      </label>
                     ))}
-                    <div className="button-container">
-                      {/* <button className="add-to-cart" onClick={() => handleAddToCart(product)}>🛒 Add to Cart</button> */}
-                      <button className="buy-button" onClick={() => handleBuyNow(product)}>💳 Buy Now</button>
-                    </div>
                   </div>
-                )}
-              </div>
+                  <button
+                    className="w-full mt-4 bg-gradient-to-r from-blue-500 to-blue-700 text-white py-2 rounded-xl font-semibold text-lg shadow-md hover:shadow-lg transition-transform hover:scale-105 focus:outline-none"
+                    onClick={() => handleBuyNow(product)}
+                  >
+                    💳 Buy Now
+                  </button>
+                </div>
+              )}
             </div>
           ))}
         </div>
