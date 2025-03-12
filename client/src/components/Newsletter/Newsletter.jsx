@@ -8,7 +8,7 @@ export default function Newsletter() {
         <div className='grid lg:grid-cols-2 grid-cols-1 items-center gap-5 w-full xl:px-20 xl:py-10 md:p-10 p-5'>
           <div className='space-y-2.5 flex flex-col items-center lg:items-start'>
             <h1 className='flex gap-5 xl:text-4xl md:text-3xl text-2xl font-bold !font-[mulish] items-center text-white'><span className='item-align animated-icon !text-white'><FaEnvelope style={{ transform: "rotate(25deg)" }} /></span>Subscribe for Newsletter</h1>
-            <p className='text-white md:text-base text-sm font-[mulish] text-center'>Grow Your Business with Our SEO Agency</p></div>
+            <p className='text-white md:text-base text-sm font-[mulish] text-center'>Lets grow your score </p></div>
           <div className='space-y-2.5 flex flex-col'>
             <p className='md:text-base text-sm text-white text-center md:text-left'>Stay updated with our latest news and offers!</p>
             <form class="w-full md:relative">

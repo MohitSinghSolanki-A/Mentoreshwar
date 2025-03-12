@@ -35,7 +35,7 @@ const Contact = () => {
                 <div className="lg:grid grid-cols-2 gap-8">
                     <div className="flex flex-col justify-center">
                         <h2 className="text-5xl font-bold">Request a Callback</h2>
-                        <p className="!mt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</p>
+                        <p className="!mt-4">Our experts are here to assist you. Fill in your details, and we’ll get in touch shortly!</p>
                     </div>
                     <div className="flex justify-center">
                         <img src={man} alt="Contact Us" className="contact-image h-auto w-[350px]" />
