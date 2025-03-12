@@ -1,27 +1,103 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
+import { motion } from "framer-motion";
+import { FaUserGraduate, FaRocket, FaGlobe, FaUsers } from "react-icons/fa";
 
-const services = [
-    { id: 1, title: "Guidance", description: "Personalized career guidance from experts.", image: "/images/guidance.png" },
-    { id: 2, title: "1-on-1 Sessions", description: "Book a private session with mentors.", image: "/images/session.png" },
-    { id: 3, title: "Test Series", description: "Prepare with curated test series.", image: "/images/test-series.png" },
-    { id: 4, title: "Mock Interviews", description: "Ace interviews with mock sessions.", image: "/images/mock-interview.png" }
+const mentorshipData = [
+    {
+        icon: <FaUserGraduate className="w-8 h-8 text-[#44448E]" />,
+        title: "1 ON 1 Sessions",
+        description: "Get personal guidance to unlock your full potential.",
+        points: ["Personalized", "Focused Learning", "Expert Advice"],
+    },
+    {
+        icon: <FaRocket className="w-8 h-8 text-[#44448E]" />,
+        title: "Career Growth",
+        description: "Boost your career with expert mentorship and advice.",
+        points: ["Resume Review", "Interview Prep", "Skill Development"],
+    },
+    {
+        icon: <FaGlobe className="w-8 h-8 text-[#44448E]" />,
+        title: "Global Networking",
+        description: "Connect with industry leaders and like-minded individuals.",
+        points: ["LinkedIn Optimization", "Networking Events", "Opportunities"],
+    },
+    {
+        icon: <FaUsers className="w-8 h-8 text-[#44448E]" />,
+        title: "Community Support",
+        description: "Learn and grow with a supportive peer group.",
+        points: ["Q&A Forums", "Group Discussions", "Exclusive Resources"],
+    },
 ];
 
 const MentorshipServices = () => {
     return (
-        <div className="mentor-container">
-            <div className="max-w-6xl mx-auto py-12 px-6">
-                <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Our Mentorship Services</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-                    {services.map((service) => (
-                        <div key={service.id} className="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center text-center">
-                            <img src={service.image} alt={service.title} className="w-24 h-24 object-cover mb-4" />
-                            <h3 className="text-xl font-semibold text-gray-800">{service.title}</h3>
-                            <p className="text-gray-600 mt-2">{service.description}</p>
-                        </div>
+        <div className="container">
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1 }}
+                className="container mx-auto px-4 py-16 md:px-8 lg:px-16"
+            >
+                <motion.div
+                    initial={{ y: 30, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    className="text-center mb-12"
+                >
+                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
+                        Elevate Your Journey with Expert Guidance 🚀
+                    </h2>
+                    <p className="text-gray-700 mt-4 text-base md:text-lg max-w-2xl mx-auto">
+                        Join a community of learners and professionals who are shaping their futures
+                        through personalized mentorship, career insights, and real-world guidance.
+                    </p>
+                </motion.div>
+
+
+                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                    {mentorshipData.map((item, index) => (
+                        <motion.div
+                            key={index}
+                            initial={{ y: 20, opacity: 0 }}
+                            whileInView={{ y: 0, opacity: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6, delay: index * 0.1 }}
+                            className="relative flex flex-col items-center bg-white shadow-md rounded-xl p-6 text-center transition-transform transform hover:scale-105 hover:shadow-lg"
+                        >
+                            {/* Animated Background Circle */}
+                            <div className="absolute -top-4 -left-4 w-16 h-16 bg-indigo-100 rounded-full opacity-30"></div>
+
+                            {/* Icon */}
+                            <div className="relative flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-indigo-50">
+                                {item.icon}
+                            </div>
+
+                            {/* Title */}
+                            <h6 className="mb-2 text-lg font-semibold">{item.title}</h6>
+
+                            {/* Description */}
+                            <p className="mb-4 text-sm text-gray-600">{item.description}</p>
+
+                            {/* Points */}
+                            <ul className="mb-4 space-y-2 text-gray-700">
+                                {item.points.map((point, idx) => (
+                                    <li key={idx} className="flex items-center justify-center">
+                                        <span className="mr-2 text-[#44448E]">✔</span>
+                                        {point}
+                                    </li>
+                                ))}
+                            </ul>
+
+                            <button className="px-4 py-2 text-sm font-medium text-white bg-[#44448E] rounded-lg transition hover:bg-[#44448E]">
+                                Learn More
+                            </button>
+                        </motion.div>
                     ))}
                 </div>
-            </div>
+
+            </motion.div>
         </div>
     );
 };

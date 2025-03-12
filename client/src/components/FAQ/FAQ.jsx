@@ -27,8 +27,8 @@ export default function FAQ() {
               onClick={() => toggleAccordion(index)}
               className={`bg-[#44448e] ${openIndex === index ? "active" : ""} text-white flex justify-between items-center lg:w-3xl md:w-2xl w-72 px-2.5 py-5 rounded-xl`}
               aria-expanded={openIndex === index}
-              role="button" // Important for accessibility
-              tabIndex="0" // Important for accessibility
+              role="button"
+              tabIndex="0"
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                   toggleAccordion(index);
