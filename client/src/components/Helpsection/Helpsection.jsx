@@ -1,5 +1,4 @@
 import React from 'react'
-import './Helpsection.css'
 
 export default function Helpsection() {
   return (

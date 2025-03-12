@@ -9,7 +9,7 @@ import Newsletter from '../Newsletter/Newsletter'
 
 export default function Home() {
   return (
-    <div className="home">
+    <div>
       <Hero />
       <Feature />
       <Mentor />

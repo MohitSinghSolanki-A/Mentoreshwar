@@ -91,7 +91,7 @@ export default function Products() {
                     ))}
                   </div>
                   <button
-                    className="w-full mt-4 bg-gradient-to-r from-blue-500 to-blue-700 text-white py-2 rounded-xl font-semibold text-lg shadow-md hover:shadow-lg transition-transform hover:scale-105 focus:outline-none"
+                    className="w-full mt-4 bg-[#44448E]  text-white py-2 rounded-xl font-semibold text-lg shadow-md hover:shadow-lg transition-transform hover:scale-105 focus:outline-none"
                     onClick={() => handleBuyNow(product)}
                   >
                     💳 Buy Now

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import loginsvg from "../../assets/login.jpg"
 
 export default function Login() {
 
@@ -28,13 +27,10 @@ export default function Login() {
       const data = await response.json();
 
       if (response.ok) {
-        const decodedToken = jwtDecode(data.token);
-        const expiryTime = decodedToken.exp;
 
         localStorage.setItem("token", data.token);
         localStorage.setItem("userId", data.userId);
         localStorage.setItem("isAuthenticated", "true");
-        localStorage.setItem("tokenExpiry", (expiryTime * 1000).toString()); // Convert to milliseconds
 
         if (formData.email === "admin@gmail.com") {
           localStorage.setItem("setpostJob", "true");
