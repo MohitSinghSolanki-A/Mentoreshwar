@@ -12,10 +12,11 @@ export default function Footer() {
           <div className="p-5 space-y-3 w-full md:w-auto">
             <h2 className='text-xl font-[mulish] text-white'>Quick Links</h2>
             <div className='flex flex-col space-y-3'>
-              <a href="#home" className='text-sm font-[mulish] text-white'>Home</a>
-              <a href="#services" className='text-sm font-[mulish] text-white'>Services</a>
-              <a href="#about" className='text-sm font-[mulish] text-white'>About</a>
-              <a href="#contact" className='text-sm font-[mulish] text-white'>Contact Us</a>
+              <a href="/" className='text-sm font-[mulish] text-white'>Home</a>
+              <a href="/mentorship" className='text-sm font-[mulish] text-white'>Metorship</a>
+              <a href="/aboutus" className='text-sm font-[mulish] text-white'>About Us</a>
+              <a href="/contact" className='text-sm font-[mulish] text-white'>Contact Us</a>
+              <a href="/job" className='text-sm font-[mulish] text-white'>Opportunities</a>
             </div>
           </div>
           <div className="p-5 space-y-3 w-full md:w-auto">
@@ -26,8 +27,8 @@ export default function Footer() {
           </div>
           <div className="p-5 space-y-3 w-full md:w-auto">
             <h2 className='text-xl font-[mulish] text-white'>Contact Info</h2>
-            <p className='text-sm font-[mulish] text-white'>Email: info@example.com</p>
-            <p className='text-sm font-[mulish] text-white'>Phone: (123) 456-7890</p>
+            <p className='text-sm font-[mulish] text-white'>Email: admin@mentoreshwar.com</p>
+            <p className='text-sm font-[mulish] text-white'>Phone: (+91) 7738601618</p>
           </div>
         </div>
         <div className='h-px w-full bg-gray-700/60 my-4'></div>
