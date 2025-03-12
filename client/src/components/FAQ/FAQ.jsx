@@ -1,4 +1,3 @@
-import './FAQ.css';
 import { useState } from "react";
 import { FaCircleChevronUp, FaCircleChevronDown, FaQ } from "react-icons/fa6";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { FaStopwatch, FaCalendarDays, FaHeadset } from "react-icons/fa6";
-import './Feature.css';
+
 
 function Feature({ icon, title, description }) {
   return (
