@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { jwtDecode } from "jwt-decode";
 // import loginsvg from "../../assets/login.jpg"
 
 export default function Login() {
