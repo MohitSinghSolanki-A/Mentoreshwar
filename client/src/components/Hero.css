@@ -1,4 +1,4 @@
-.hero {
+/* .hero {
   width: 100%;
   min-width: 1440px;
   color: white;
@@ -79,7 +79,7 @@
   color: #ff3e6c;
 }
 
-/* Responsive Design */
+
 @media (max-width: 1024px) {
   .hero-container {
     flex-direction: column;
@@ -105,4 +105,4 @@
     justify-content: center;
     margin-top: 20px;
   }
-}
+} */

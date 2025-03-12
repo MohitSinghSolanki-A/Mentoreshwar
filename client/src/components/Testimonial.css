@@ -1,4 +1,4 @@
-.testimonials {
+/* .testimonials {
   padding: 4rem 2rem;
   background-color: #f8f9fa;
   padding: 80px 20px;
@@ -28,7 +28,7 @@
 
 .testimonial-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2-column layout */
+  grid-template-columns: repeat(2, 1fr); 
   gap: 20px;
   justify-content: center;
 }
@@ -72,4 +72,4 @@
   .testimonial-grid {
     grid-template-columns: 1fr;
   }
-}
+} */

@@ -1,4 +1,4 @@
-.home {
+/* .home {
     min-width: 100vh;
     display: flex;
     flex-direction: column;
@@ -76,7 +76,7 @@
     border-radius: 8px;
 }
 
-/* Zig-zag pattern */
+
 .service-item.left {
     flex-direction: row;
 }
@@ -85,7 +85,7 @@
     flex-direction: row-reverse;
 }
 
-/* Responsive */
+
 @media (max-width: 768px) {
     .service-item {
         flex-direction: column !important;
@@ -95,4 +95,4 @@
     .service-image img {
         max-width: 150px;
     }
-}
+} */

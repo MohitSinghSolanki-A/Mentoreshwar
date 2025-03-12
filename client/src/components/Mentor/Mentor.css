@@ -3,7 +3,7 @@
   margin: 0;
   box-sizing: border-box;
   text-decoration: none;
-} */
+}
 
 .mentor-container {
   max-width: 1440px;
@@ -14,21 +14,21 @@
   gap: 30px;
   padding: 80px 20px;
   margin: 0 auto;
-  /* Centers the container */
+  Centers the container
 }
 
 .mentor-column-1 {
   flex: 1;
-  /* Ensures both columns take up equal width */
+  
   padding: 80px 20px;
-  /* Optional: Adds padding inside each column */
+  
 }
 
 .mentor-column-2 {
   flex: 1;
-  /* Ensures both columns take up equal width */
+  
   padding: 80px 20px;
-  /* Optional: Adds padding inside each column */
+  
   display: flex;
   align-items: center;
   justify-content: center;
@@ -36,7 +36,7 @@
 
 .mentor-column-1 h1 {
   font-size: 3rem;
-  /*48px font size*/
+  
   font-weight: 700;
   color: var(--text-color);
 }
@@ -72,7 +72,7 @@
 
 @media (max-width: 768px) {
   .mentor-container {
-    /* Stacks columns vertically for Flexbox */
+    
     gap: 0;
     flex-direction: column;
   }
@@ -109,4 +109,4 @@
     height: 400px;
     background-color: var(--secondary-color);
   }
-}
+} */
