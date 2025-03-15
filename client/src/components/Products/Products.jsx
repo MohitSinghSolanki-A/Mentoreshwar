@@ -68,10 +68,10 @@ export default function Products() {
   };
 
   return (
-    <div className="pt-24 px-4">
+    <div className="container max-w-[1440px] m-auto w-full py-20 px-5">
       <ToastContainer />
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold text-gray-800 text-center mb-10">
+      <div className="">
+        <h1 className="text-4xl font-bold text-gray-800 text-center">
           Available Test Series
         </h1>
         <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

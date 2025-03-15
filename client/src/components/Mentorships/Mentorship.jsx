@@ -32,12 +32,12 @@ const mentorshipData = [
 
 const MentorshipServices = () => {
     return (
-        <div className="container">
+        <div className="container m-auto max-w-[1440px]">
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1 }}
-                className="container mx-auto px-4 py-16 md:px-8 lg:px-16"
+                className="container mx-auto px-5 lg:py-20 md:py-16 py-10 md:px-8 lg:px-16"
             >
                 <motion.div
                     initial={{ y: 30, opacity: 0 }}
@@ -66,8 +66,6 @@ const MentorshipServices = () => {
                             transition={{ duration: 0.6, delay: index * 0.1 }}
                             className="relative flex flex-col items-center bg-white shadow-md rounded-xl p-6 text-center transition-transform transform hover:scale-105 hover:shadow-lg"
                         >
-                            {/* Animated Background Circle */}
-                            <div className="absolute -top-4 -left-4 w-16 h-16 bg-indigo-100 rounded-full opacity-30"></div>
 
                             {/* Icon */}
                             <div className="relative flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-indigo-50">
@@ -90,7 +88,7 @@ const MentorshipServices = () => {
                                 ))}
                             </ul>
 
-                            <button className="px-4 py-2 text-sm font-medium text-white bg-[#44448E] rounded-lg transition hover:bg-[#44448E]">
+                            <button className="px-4 py-2 text-sm font-medium text-white bg-[#44448E] rounded-full transition hover:bg-[#44448E]">
                                 Learn More
                             </button>
                         </motion.div>
