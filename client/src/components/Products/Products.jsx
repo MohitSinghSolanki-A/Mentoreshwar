@@ -86,19 +86,11 @@ export default function Products() {
   };
 
   return (
-
-    <div className="container max-w-[1440px] m-auto w-full py-20 px-5">
-      <ToastContainer />
-      <div className="">
-        <h1 className="text-4xl font-bold text-gray-800 text-center">
-          Available Test Series
-
     <div className="pt-24 px-6 bg-gray-50 min-h-screen">
       <ToastContainer />
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl font-extrabold text-gray-900 text-center mb-12">
           🚀 Exclusive Test Series
-
         </h1>
 
         {loading ? (
@@ -130,8 +122,8 @@ export default function Products() {
                           <button
                             key={subject.name}
                             className={`px-4 py-2 text-sm font-medium rounded-lg border transition-all duration-200 ${selectedSubjects[product._id]?.includes(subject.name)
-                                ? "bg-blue-600 text-white border-blue-600"
-                                : "bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200"
+                              ? "bg-blue-600 text-white border-blue-600"
+                              : "bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200"
                               }`}
                             onClick={() => handleSubjectSelection(product._id, subject)}
                           >
@@ -161,7 +153,7 @@ export default function Products() {
                       )}
 
                       <button
-                        className="w-full mt-6 bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 rounded-xl font-semibold text-lg shadow-md hover:shadow-lg transition-transform hover:scale-105 focus:outline-none"
+                        className="w-full mt-6 bg-[#44448E] text-white py-3 rounded-xl font-semibold text-lg shadow-md hover:shadow-lg transition-transform hover:scale-105 focus:outline-none"
                         onClick={() => handleBuyNow(product)}
                       >
                         🛒 Buy Now
