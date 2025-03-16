@@ -44,7 +44,7 @@ const login = async (req, res) => {
 
     const token = jwt.sign({ userId: user._id }, "your_jwt_secret", { expiresIn: "60s" });
 
-    res.status(200).json({ token, userId: user._id, message: "Login successful" });
+    res.status(200).json({ token, userId: user._id, email: user.email, message: "Login successful" });
 
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -67,8 +67,31 @@ const getUserById = async (req, res) => {
 
 const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find().select("-password"); // Exclude passwords
+    const users = await User.find().select("-password");
     res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// 🔹 Update user
+const updateUser = async (req, res) => {
+  try {
+
+    const { userId, username, address, phoneNumber, attempt } = req.body;
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    if (username) user.username = username;
+    if (address) user.address = address;
+    if (phoneNumber) user.phoneNumber = phoneNumber;
+    if (attempt) user.attempt = attempt;
+
+    await user.save();
+    res.status(200).json({ message: "User updated successfully", user });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -76,5 +99,4 @@ const getAllUsers = async (req, res) => {
 
 
 
-
-module.exports = { register, login, getUserById, getAllUsers };
+module.exports = { register, login, getUserById, getAllUsers, updateUser };

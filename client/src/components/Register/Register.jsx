@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { FaCheck } from 'react-icons/fa';
 
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 export default function RegistrationForm() {
     const navigate = useNavigate();
@@ -10,6 +13,7 @@ export default function RegistrationForm() {
         username: "",
         email: "",
         password: "",
+        otp: "",
         agreeTerms: false,
     });
 
@@ -19,6 +23,8 @@ export default function RegistrationForm() {
     };
 
     const [errors, setErrors] = useState({});
+    const [otpSent, setOtpSent] = useState(false);
+    const [otpVerified, setOtpVerified] = useState(false);
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -38,17 +44,77 @@ export default function RegistrationForm() {
         }
         if (!formData.password) newErrors.password = "Password is required";
         if (!formData.agreeTerms) newErrors.agreeTerms = "You must agree to terms";
+        if (!formData.otp) newErrors.otp = "OTP is required";
 
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (!validateForm()) return;
+
+
+    // Send OTP function
+    const sendOtp = async () => {
+        if (!formData.email) {
+            toast.error("Enter a valid email to receive OTP!");
+            return;
+        }
 
         try {
-            const response = await fetch("http://localhost:3001/api/auth/register", {
+            const response = await fetch(`http://localhost:3001/api/call/sendotp`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: formData.email }),
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                toast.success("📩 OTP sent successfully! Check your email.");
+                setOtpSent(true);
+            } else {
+                toast.error(`❌ ${data.error}`);
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error("❌ Failed to send OTP");
+        }
+    };
+
+    // Verify OTP function
+    const verifyOtp = async () => {
+        if (!formData.otp) {
+            toast.error("Enter OTP to verify!");
+            return;
+        }
+
+        try {
+            const response = await fetch(`http://localhost:3001/api/call/verifyotp`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: formData.email, otp: formData.otp }),
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                toast.success("✅ OTP verified successfully!");
+                setOtpVerified(true);
+            } else {
+                toast.error(`❌ ${data.error}`);
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error("❌ OTP verification failed");
+        }
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (!validateForm() || !otpVerified) {
+            toast.error("Please verify OTP before registration.");
+            return;
+        }
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData),
@@ -56,6 +122,7 @@ export default function RegistrationForm() {
 
             const data = await response.json();
             if (response.ok) {
+
                 toast.success("🎉 Registration successful! Please login.");
                 setTimeout(() => navigate("/login"), 2000);
             } else {
@@ -66,6 +133,8 @@ export default function RegistrationForm() {
             toast.error("❌ Something went wrong. Try again!");
         }
     };
+
+
 
     return (
 
@@ -113,10 +182,33 @@ export default function RegistrationForm() {
                             onChange={handleChange}
                             placeholder="Email Address" />
                         {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+                        {!otpSent ? (
+                            <button type="button" onClick={sendOtp} className="ml-2 bg-blue-500 text-white px-3 py-1 rounded">
+                                Send OTP
+                            </button>
+                        ) : otpVerified ? (
+                            <FaCheck className="ml-2 text-green-500" size={20} />
+                        ) : (
+                            <div className="flex gap-2">
+                                <input
+                                    type="text"
+                                    name="otp"
+                                    value={formData.otp}
+                                    onChange={handleChange}
+                                    placeholder="Enter OTP"
+                                    className="ml-2 border px-2 py-1 rounded"
+                                />
+                                <button type="button" onClick={verifyOtp} className="bg-green-500 text-white px-3 py-1 rounded">
+                                    Verify OTP
+                                </button>
+                            </div>
+                        )}
+
                     </div>
 
 
-                    {/* Password Field */}
+
+
                     <div className="flex items-center border-2 py-2 px-3 rounded-2xl">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
                             fill="currentColor">
@@ -133,7 +225,7 @@ export default function RegistrationForm() {
                         {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
                     </div>
 
-                    {/* Terms & Conditions */}
+
                     <div className="flex items-center">
                         <input
                             type="checkbox"

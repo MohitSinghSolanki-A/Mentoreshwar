@@ -17,25 +17,22 @@ const razorpay = new Razorpay({
 });
 
 
-// ✅ Create an Order
 exports.createOrder = async (req, res) => {
     try {
-        const { productIds, userId, subjects } = req.body;
+        const { productIds, userId, amount } = req.body;
 
         if (!Array.isArray(productIds) || productIds.length === 0) {
             return res.status(400).json({ success: false, message: "No products selected" });
         }
 
-        //adding subjects prices
-        let totalAmount = 0;
-        for (let i = 0; i < subjects.length; i++) {
-            totalAmount += subjects[i].price;
+        if (!amount || amount <= 0) {
+            return res.status(400).json({ success: false, message: "Invalid amount" });
         }
 
 
-        // 🔹 Create Razorpay order (DO NOT save in DB)
+
         const razorpayOrder = await razorpay.orders.create({
-            amount: totalAmount * 100,
+            amount: amount,
             currency: "INR",
             receipt: "order_receipt_" + new Date().getTime(),
             notes: { userId, productIds: JSON.stringify(productIds) },
@@ -45,7 +42,7 @@ exports.createOrder = async (req, res) => {
             success: true,
             message: "Order created successfully",
             orderId: razorpayOrder.id,
-            amount: totalAmount * 100,
+            amount: amount,
             currency: "INR",
         });
     } catch (error) {
@@ -55,12 +52,12 @@ exports.createOrder = async (req, res) => {
 };
 
 
-// ✅ Verify Payment & Store Data in DB
+
 exports.verifyPayment = async (req, res) => {
     try {
-        const { razorpay_order_id, razorpay_payment_id, razorpay_signature, userId, productIds, subjects } = req.body;
+        const { razorpay_order_id, razorpay_payment_id, razorpay_signature, userId, productIds, subjects, amount } = req.body;
 
-        if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature || !userId || !productIds || !subjects) {
+        if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature || !userId || !productIds || !subjects || !amount) {
             return res.status(400).json({ success: false, message: "Missing payment details" });
         }
 
@@ -73,19 +70,17 @@ exports.verifyPayment = async (req, res) => {
             return res.status(403).json({ success: false, message: "Invalid payment signature" });
         }
 
-        let totalAmount = 0;
-        for (let i = 0; i < subjects.length; i++) {
-            totalAmount += subjects[i].price;
+        console.log(amount)
+        if (amount <= 0) {
+            return res.status(400).json({ success: false, message: "Invalid amount" });
         }
-        console.log(totalAmount);
 
-        console.log("subjecs", req.body.subjects);
 
         const newOrder = new Order({
             userId,
             productIds,
-            subjects: req.body.subjects,
-            amount: totalAmount,
+            subjects,
+            amount: amount,
             razorpay_order_id,
             razorpay_payment_id,
             razorpay_signature,
@@ -97,7 +92,7 @@ exports.verifyPayment = async (req, res) => {
         res.json({
             success: true,
             message: "Payment verified & order saved",
-            subjects: req.body.subjects,
+            subjects,
             verified: true
         });
     } catch (error) {
@@ -106,20 +101,27 @@ exports.verifyPayment = async (req, res) => {
     }
 };
 
+
+
 exports.getOrdersByUser = async (req, res) => {
     try {
-        const { userId } = req.params; // Get userId from URL params
+        const { userId } = req.params;
 
         if (!userId) {
             return res.status(400).json({ success: false, message: "User ID is required" });
         }
 
-        // 🔹 Fetch orders where userId matches the logged-in user
-        const orders = await Order.find({ userId });
+        let orders = await Order.find({ userId });
 
         if (!orders.length) {
             return res.status(404).json({ success: false, message: "No orders found" });
         }
+
+        orders = orders.map(order => ({
+            ...order.toObject(),
+            amount: order.amount / 100,
+        }));
+
 
         res.json({ success: true, orders });
     } catch (error) {
