@@ -17,6 +17,7 @@ const ThankYou = () => {
 
         const timer = setTimeout(() => {
             window.location.href = "/";
+            localStorage.removeItem("purchasedCourses")
         }, 5000);
 
         return () => clearTimeout(timer);

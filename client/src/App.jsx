@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import Products from "./components/Products/Products";
@@ -22,6 +23,26 @@ export default function App() {
         <div>
           <Navbar />
           <div className="mt-[72px]">
+
+            <ToastContainer
+              position="top-right"
+              autoClose={3000}
+              hideProgressBar={false}
+              newestOnTop
+              closeOnClick
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+              toastClassName={() =>
+                "bg-white text-gray-800 shadow-lg rounded-lg px-4 py-3 border border-gray-300"
+              }
+              bodyClassName={() =>
+                "text-sm font-medium"
+              }
+              progressClassName="bg-blue-500"
+            />
+
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
