@@ -177,6 +177,27 @@ export default function RegistrationForm() {
                                 onChange={handleChange}
                                 placeholder="Email Address" />
                             {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+                            {!otpSent ? (
+                                <button type="button" onClick={sendOtp} className="ml-2 bg-blue-500 text-white px-3 py-1 rounded">
+                                    Send OTP
+                                </button>
+                            ) : otpVerified ? (
+                                <FaCheck className="ml-2 text-green-500" size={20} />
+                            ) : (
+                                <div className="flex gap-2">
+                                    <input
+                                        type="text"
+                                        name="otp"
+                                        value={formData.otp}
+                                        onChange={handleChange}
+                                        placeholder="Enter OTP"
+                                        className="ml-2 border px-2 py-1 rounded"
+                                    />
+                                    <button type="button" onClick={verifyOtp} className="bg-green-500 text-white px-3 py-1 rounded">
+                                        Verify OTP
+                                    </button>
+                                </div>
+                            )}
                         </div>
                         <div className="items-center py-2 mb-2">
                             <label className="text-sm font-bold text-gray-700 tracking-wide">Enter Password</label>
@@ -219,7 +240,7 @@ export default function RegistrationForm() {
                     </form>
 
                 </div>
-<
+
                 <div className="hidden lg:flex items-center justify-center bg-[#6868ac] flex-1">
 
                     <div>
@@ -229,115 +250,9 @@ export default function RegistrationForm() {
 
 
                 </div>
-=======
-                <div className="absolute -bottom-32 -left-40 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
-                <div className="absolute -bottom-40 -left-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
-                <div className="absolute -top-40 -right-0 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
-                <div className="absolute -top-20 -right-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
-            </div>
-            <div className="flex md:w-1/2 justify-center py-10 items-center bg-white">
-                <form className="bg-white" onSubmit={handleSubmit}>
-                    <h1 className="text-gray-800 font-bold text-2xl mb-1">Hello There!</h1>
-                    <p className="text-sm font-bold text-gray-600 mb-7">Welcome!</p>
-                    <div className="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
-                            fill="currentColor">
-                            <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                                clipRule="evenodd" />
-                        </svg>
-                        <input className="pl-2 outline-none border-none"
-                            type="text"
-                            name="username"
-                            value={formData.username}
-                            onChange={handleChange}
-                            placeholder="Enter Username" />
-                        {errors.username && <p className="text-red-500 text-sm">{errors.username}</p>}
-                    </div>
-
-                    <div className="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                                d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
-                        </svg>
-                        <input className="pl-2 outline-none border-none"
-                            type="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            placeholder="Email Address" />
-                        {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
-                        {!otpSent ? (
-                            <button type="button" onClick={sendOtp} className="ml-2 bg-blue-500 text-white px-3 py-1 rounded">
-                                Send OTP
-                            </button>
-                        ) : otpVerified ? (
-                            <FaCheck className="ml-2 text-green-500" size={20} />
-                        ) : (
-                            <div className="flex gap-2">
-                                <input
-                                    type="text"
-                                    name="otp"
-                                    value={formData.otp}
-                                    onChange={handleChange}
-                                    placeholder="Enter OTP"
-                                    className="ml-2 border px-2 py-1 rounded"
-                                />
-                                <button type="button" onClick={verifyOtp} className="bg-green-500 text-white px-3 py-1 rounded">
-                                    Verify OTP
-                                </button>
-                            </div>
-                        )}
-
-                    </div>
-
-
-
-
-                    <div className="flex items-center border-2 py-2 px-3 rounded-2xl">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
-                            fill="currentColor">
-                            <path fillRule="evenodd"
-                                d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                                clipRule="evenodd" />
-                        </svg>
-                        <input className="pl-2 outline-none border-none"
-                            type="password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            placeholder="Enter Password" />
-                        {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
-                    </div>
-
-
-                    <div className="flex items-center">
-                        <input
-                            type="checkbox"
-                            name="agreeTerms"
-                            checked={formData.agreeTerms}
-                            onChange={handleChange}
-                            className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring focus:ring-blue-300"
-                        />
-                        <label className="ml-2 text-sm text-gray-700">I agree to the terms & conditions</label>
-                    </div>
-                    {errors.agreeTerms && <p className="text-red-500 text-sm">{errors.agreeTerms}</p>}
-
-                    <button type="submit"
-                        className="block w-full bg-indigo-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2">Register</button>
-
-                    <div className="mt-12 text-sm font-display font-semibold text-gray-700 text-center">
-                        Have an account?
-                        <span
-                            onClick={handleSignIn}
-                            className="ml-1 text-indigo-600 hover:text-indigo-800 transition duration-200 cursor-pointer"
-                        >
-                            Sign In
-                        </span>
-                    </div>
-                </form>
 
             </div>
+
         </>
     );
 }

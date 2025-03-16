@@ -65,28 +65,7 @@ const AboutUs = () => {
                     </div>
                 </div>
 
-                {/* Team Section */}
-                <div className="mt-16">
-                    <h2 className="text-3xl font-bold text-gray-800 text-center mb-8">Meet Our Team</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {[1, 2, 3].map((item, index) => (
-                            <div key={index} className="bg-white p-6 rounded-lg shadow-lg">
-                                <img
-                                    className="w-full h-48 object-cover rounded-t-lg"
-                                    src="https://via.placeholder.com/600x400"
-                                    alt="Team Member"
-                                />
-                                <div className="p-4">
-                                    <h3 className="text-lg font-semibold text-gray-800">Jane Smith</h3>
-                                    <p className="text-gray-600 text-sm">Senior Mentor</p>
-                                    <p className="text-gray-600 mt-2">
-                                        Jane has over 15 years of experience in finance and accounting, and she is dedicated to helping students achieve their goals.
-                                    </p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
+
             </div>
         </div>
     );
