@@ -105,7 +105,7 @@ export default function Navbar() {
                 {/* Login/Logout Button */}
                 <div className="w-full md:w-auto">
                   {isLoggedIn ? (
-                    <button className="px-5 py-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition text-base font-normal font-[mulish]" onClick={handleLogout}>Logout</button>
+                    <button className="px-5 py-2 bg-[#272757] text-white rounded-full hover:bg-red-600 transition text-base font-normal font-[mulish]" onClick={handleLogout}>Logout</button>
                   ) : (
                     <Link to="/login" className="px-5 py-2 text-base font-normal font-[mulish] bg-[#272757] text-white rounded-full hover:bg-[#44448e] transition" onClick={() => setMenuOpen(false)}>Login</Link>
                   )}
