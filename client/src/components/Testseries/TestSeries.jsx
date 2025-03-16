@@ -5,6 +5,8 @@ import "react-toastify/dist/ReactToastify.css";
 pdfjsLib.GlobalWorkerOptions.workerSrc =
     `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js`;
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+
 export default function TestSeries() {
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -19,7 +21,7 @@ export default function TestSeries() {
 
     const fetchOrders = async () => {
         try {
-            const response = await fetch(`http://localhost:3001/api/payment/orders/${userId}`);
+            const response = await fetch(`${API_BASE_URL}/api/payment/orders/${userId}`);
             const data = await response.json();
             if (response.ok) {
                 setOrders(data.orders);
@@ -52,7 +54,7 @@ export default function TestSeries() {
         setUploading(true);
 
         try {
-            const response = await fetch("http://localhost:3001/api/uploads", {
+            const response = await fetch(`${API_BASE_URL}/api/uploads`, {
                 method: "POST",
                 body: formData,
             });

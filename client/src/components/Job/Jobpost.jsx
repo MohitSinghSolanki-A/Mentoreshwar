@@ -1,16 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const JobCard = ({ job, onClick }) => {
-    return (
-        <div className="bg-white shadow-md p-6  cursor-pointer" onClick={() => onClick(job)}>
-            <img src={job.logo} alt="Company Logo" className="w-16 h-16 object-contain mb-2" />
-            <h2 className="text-xl font-bold">{job.companyName}</h2>
-            <p className="text-blue-500 flex items-center">📍 {job.location}</p>
-            {job.stipend && <p className="text-green-500 flex items-center">💰 ₹{job.stipend}</p>}
-        </div>
-    );
-};
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const JobModal = ({ job, onClose }) => {
     if (!job) return null;
@@ -27,16 +18,13 @@ const JobModal = ({ job, onClose }) => {
     };
 
     return (
-        <div
-            className="fixed inset-0 flex items-center justify-center"
-            onClick={onClose}
-        >
-            <div
-                className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md md:max-w-lg"
-                onClick={(e) => e.stopPropagation()}
-            >
-                <h2 className="text-2xl font-bold text-[#44448E]">{job.companyName}</h2>
-                <p className="text-gray-600">{job.description}</p>
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-11/12 max-w-md md:max-w-lg transform transition-all">
+                <button className="absolute top-4 right-4 text-gray-600 hover:text-gray-800" onClick={onClose}>
+                    &times;
+                </button>
+                <h2 className="text-2xl font-bold text-[#44448E] mb-4">{job.companyName}</h2>
+                <p className="text-gray-600 my-2">{job.description}</p>
                 <p className="text-blue-500 flex items-center">📍 {job.location}</p>
 
                 {job.applyLink.includes("@") ? (
@@ -44,94 +32,101 @@ const JobModal = ({ job, onClose }) => {
                         ✉️ <a href={`mailto:${job.applyLink}`} className="ml-1 underline">{job.applyLink}</a>
                     </p>
                 ) : (
-                    <button
-                        className="bg-[#44448E] text-white px-4 py-2 rounded mt-4 w-full"
-                        onClick={handleApply}
-                    >
+                    <button className="bg-[#44448E] text-white px-4 py-2 rounded mt-4 w-full hover:bg-[#2c2c6e] transition" onClick={handleApply}>
                         Apply Now
                     </button>
                 )}
-
-                <button className="text-red-500 mt-2 w-full" onClick={onClose}>
-                    Close
-                </button>
             </div>
         </div>
     );
 };
-
 
 const JobList = () => {
     const [jobs, setJobs] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [selectedCategory, setSelectedCategory] = useState("All");
     const [selectedJob, setSelectedJob] = useState(null);
-    const [category, setCategory] = useState("All");
-    const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:3001/api/job")
-            .then((response) => {
+        const fetchJobs = async () => {
+            try {
+                const response = await axios.get(`${API_BASE_URL}/api/job`);
                 setJobs(response.data);
+            } catch (err) {
+                setError("Failed to load jobs. Please try again.", err);
+            } finally {
                 setLoading(false);
-
-                // Extract unique categories
-                const uniqueCategories = [...new Set(response.data.map(job => job.category))];
-                setCategories(uniqueCategories);
-            })
-            .catch((error) => {
-                console.error("Error fetching jobs:", error);
-                setError("Failed to load jobs.");
-                setLoading(false);
-            });
+            }
+        };
+        fetchJobs();
     }, []);
 
-    const filteredJobs = category === "All" ? jobs : jobs.filter(job => job.category === category);
+    const formatDate = (dateString) => {
+        return new Date(dateString).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+    };
+
+    const categories = ["All", ...new Set(jobs.map((job) => job.category))];
+
+    const filteredJobs = selectedCategory === "All" ? jobs : jobs.filter((job) => job.category === selectedCategory);
 
     return (
-        <div className="container mx-auto p-6">
-            {/* Grid Layout */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="bg-gray-100 min-h-screen flex flex-col">
+            {/* Header */}
+            <header className="bg-[#44448E] text-white py-4 px-6 text-center text-2xl font-bold">
+                Job Board
+            </header>
 
-                {/* Sidebar Filters */}
-                <div>
-                    <h3 className="text-lg font-bold mb-4">Category</h3>
-                    <select
-                        className="w-full p-2 border rounded"
-                        value={category}
-                        onChange={(e) => setCategory(e.target.value)}
+            {/* Category Filters */}
+            <div className="bg-white shadow-md py-3 px-6 flex flex-wrap justify-center gap-3 border-b">
+                {categories.map((category) => (
+                    <button
+                        key={category}
+                        className={`px-4 py-2 border rounded-md transition ${selectedCategory === category ? "bg-[#44448E] text-white" : "bg-gray-200 hover:bg-gray-300"
+                            }`}
+                        onClick={() => setSelectedCategory(category)}
                     >
-                        <option value="All">All</option>
-                        {categories.map((cat, index) => (
-                            <option key={index} value={cat}>{cat}</option>
-                        ))}
-                    </select>
-                </div>
-
-                {/* Job Listings - Spans remaining 3 columns */}
-                <div className="md:col-span-3">
-                    <h1 className="text-3xl font-bold text-center mb-6">Job Listings</h1>
-                    {loading && <p className="text-center text-gray-600">Loading jobs...</p>}
-                    {error && <p className="text-red-500 text-center">{error}</p>}
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {filteredJobs.map((job, index) => (
-                            <div
-                                key={job._id}
-                                className={`${index % 2 === 0 ? "md:col-span-2" : "md:col-span-1"}`}
-                            >
-                                <JobCard job={job} onClick={setSelectedJob} />
-                            </div>
-                        ))}
-                    </div>
-                </div>
+                        {category}
+                    </button>
+                ))}
             </div>
 
-            {/* Job Modal */}
-            <JobModal job={selectedJob} onClose={() => setSelectedJob(null)} />
+            {/* Job Listings */}
+            <div className="flex-1 overflow-auto p-6">
+                {loading ? (
+                    <p className="text-center text-gray-600">Loading jobs...</p>
+                ) : error ? (
+                    <p className="text-center text-red-500">{error}</p>
+                ) : (
+                    <div className="bg-white shadow-md rounded-lg overflow-hidden">
+                        {/* Table Header */}
+                        <div className="grid grid-cols-3 md:grid-cols-4 bg-gray-200 text-gray-600 font-semibold p-4">
+                            <p>Posted On</p>
+                            <p className="hidden md:block">Logo</p>
+                            <p>Company Name</p>
+                            <p>Details</p>
+                        </div>
+
+                        {/* Job Rows */}
+                        <div className="divide-y divide-gray-200">
+                            {filteredJobs.map((job, index) => (
+                                <div key={index} className="grid grid-cols-3 md:grid-cols-4 items-center p-4 hover:bg-gray-50 transition">
+                                    <p className="text-gray-600">{formatDate(job.createdAt)}</p>
+                                    <img src={job.logo} alt="Logo" className="hidden md:block w-12 h-12 object-contain" />
+                                    <p className="text-gray-700 font-semibold">{job.companyName}</p>
+                                    <button className="bg-[#44448E] text-white px-4 py-2 rounded hover:bg-[#2c2c6e] transition" onClick={() => setSelectedJob(job)}>
+                                        More
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+            </div>
+
+            {selectedJob && <JobModal job={selectedJob} onClose={() => setSelectedJob(null)} />}
         </div>
     );
 };
-
 
 export default JobList;

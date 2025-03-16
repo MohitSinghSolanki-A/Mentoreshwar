@@ -2,6 +2,8 @@ import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+
 export default function Login() {
 
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -26,10 +28,12 @@ export default function Login() {
 
       const data = await response.json();
 
+      console.log("API Response:", data);
       if (response.ok) {
 
         localStorage.setItem("token", data.token);
         localStorage.setItem("userId", data.userId);
+        localStorage.setItem('email', data.email)
         localStorage.setItem("isAuthenticated", "true");
 
         if (formData.email === "admin@gmail.com") {
@@ -114,7 +118,7 @@ export default function Login() {
         </div>
         <div className="hidden lg:flex items-center justify-center bg-[#6868ac] flex-1">
           <div className="max-w-xs transform duration-200 hover:scale-110 cursor-pointer">
-            <svg class="w-5/6 mx-auto" xmlns="http://www.w3.org/2000/svg" id="f080dbb7-9b2b-439b-a118-60b91c514f72" data-name="Layer 1" viewBox="0 0 528.71721 699.76785">
+            <svg className="w-5/6 mx-auto" xmlns="http://www.w3.org/2000/svg" id="f080dbb7-9b2b-439b-a118-60b91c514f72" data-name="Layer 1" viewBox="0 0 528.71721 699.76785">
               <title>Login</title>
               <rect y="17.06342" width="444" height="657" fill="#535461" />
               <polygon points="323 691.063 0 674.063 0 17.063 323 0.063 323 691.063" fill="#7f9cf5" />
@@ -126,11 +130,11 @@ export default function Login() {
               </g>
               <circle cx="296" cy="348.06342" r="13" opacity="0.1" />
               <circle cx="296" cy="346.06342" r="13" fill="#535461" />
-              <line x1="52.81943" y1="16.10799" x2="52.81943" y2="677.15616" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" opacity="0.1" />
-              <line x1="109.81943" y1="12.10799" x2="109.81943" y2="679.15616" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" opacity="0.1" />
-              <line x1="166.81943" y1="9.10799" x2="166.81943" y2="683" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" opacity="0.1" />
-              <line x1="223.81943" y1="6.10799" x2="223.81943" y2="687.15616" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" opacity="0.1" />
-              <line x1="280.81943" y1="3.10799" x2="280.81943" y2="688" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" opacity="0.1" />
+              <line x1="52.81943" y1="16.10799" x2="52.81943" y2="677.15616" fill="none" stroke="#000" strokeMiterlimit="10" strokeWidth="2" opacity="0.1" />
+              <line x1="109.81943" y1="12.10799" x2="109.81943" y2="679.15616" fill="none" stroke="#000" strokeMiterlimit="10" strokeWidth="2" opacity="0.1" />
+              <line x1="166.81943" y1="9.10799" x2="166.81943" y2="683" fill="none" stroke="#000" strokeMiterlimit="10" strokeWidth="2" opacity="0.1" />
+              <line x1="223.81943" y1="6.10799" x2="223.81943" y2="687.15616" fill="none" stroke="#000" strokeMiterlimit="10" strokeWidth="2" opacity="0.1" />
+              <line x1="280.81943" y1="3.10799" x2="280.81943" y2="688" fill="none" stroke="#000" strokeMiterlimit="10" strokeWidth="2" opacity="0.1" />
               <ellipse cx="463.21721" cy="95.32341" rx="39.5" ry="37" fill="#2f2e41" />
               <path d="M683.8586,425.93948l-10,14s-48,10-30,25,44-14,44-14l14-18Z" transform="translate(-335.6414 -100.11607)" fill="#ffb8b8" />
               <path d="M735.8586,266.93948s-13,0-16,18-6,78-6,78-42,55-35,62,15,20,20,18,48-61,48-61Z" transform="translate(-335.6414 -100.11607)" fill="#7f9cf5" />
