@@ -86,11 +86,19 @@ export default function Products() {
   };
 
   return (
+
+    <div className="container max-w-[1440px] m-auto w-full py-20 px-5">
+      <ToastContainer />
+      <div className="">
+        <h1 className="text-4xl font-bold text-gray-800 text-center">
+          Available Test Series
+
     <div className="pt-24 px-6 bg-gray-50 min-h-screen">
       <ToastContainer />
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl font-extrabold text-gray-900 text-center mb-12">
           🚀 Exclusive Test Series
+
         </h1>
 
         {loading ? (

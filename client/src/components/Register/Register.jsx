@@ -137,14 +137,99 @@ export default function RegistrationForm() {
 
 
     return (
+        <>
+            <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-5">
+                <div className="m-auto w-full max-w-[540px] grid grid-cols-1 h-full md:py-20 py-10 px-5">
 
-        <div className="h-screen md:flex">
-            <div
-                className="relative overflow-hidden md:flex w-1/2 bg-[#44448E] i justify-around items-center hidden">
-                <div>
-                    <h1 className="text-white font-bold text-4xl font-sans">Mentoreshwar</h1>
-                    <p className="text-white mt-1">The most popular peer to peer Guidance</p>
+                    <div className="flex justify-center lg:justify-start">
+                        <div className="cursor-pointer flex items-center">
+                            <svg className="w-10  stroke-current text-[#44448e]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 225 225">
+                                <g transform="matrix( 1, 0, 0, 1, 0,0)">
+                                    <g>
+                                        <path fill="none" stroke="currentColor" strokeWidth="10" strokeLinecap="round" strokeMiterlimit="3"
+                                            d="M173.8,151.5l13.6-13.6 M35.4,89.9l29.1-29 M89.4,34.9v1 M137.4,187.9l-0.6-0.4 M36.6,138.7l0.2-0.2 M56.1,169.1l27.7-27.6 M63.8,111.5l74.3-74.4 M87.1,188.1L187.6,87.6 M110.8,114.5l57.8-57.8" />
+                                    </g>
+                                </g>
+                            </svg>
+                            <div className="text-2xl text-[#272757] tracking-wide ml-2 font-semibold">Welcome Learner</div>
+                        </div>
+                    </div>
+                    <form className="" onSubmit={handleSubmit}>
+                        <div className="mt-10 lg:mt-16 xl:max-w-2xl">
+                            <h2 className="text-center text-4xl text-[#272757] font-display font-semibold lg:text-left xl:text-5xl xl:text-bold">Register Now!</h2>
+                        </div>
+                        <div className="items-center py-2 mb-2 mt-5">
+                            <label className="text-sm font-bold text-gray-700 tracking-wide">User Name</label>
+                            <input className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
+                                type="text"
+                                name="username"
+                                placeholder="Enter Username"
+                                value={formData.username}
+                                onChange={handleChange} />
+                            {errors.username && <p className="text-red-500 text-sm">{errors.username}</p>}
+                        </div>
+                        <div className="items-center py-2 mb-2">
+                            <label className="text-sm font-bold text-gray-700 tracking-wide">Email Address</label>
+                            <input className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
+                                type="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                placeholder="Email Address" />
+                            {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+                        </div>
+                        <div className="items-center py-2 mb-2">
+                            <label className="text-sm font-bold text-gray-700 tracking-wide">Enter Password</label>
+                            <input className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
+                                type="password"
+                                name="password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                placeholder="Enter Password" />
+                            {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
+                        </div>
+                        <div className="flex items-center mb-4">
+                            <input
+                                type="checkbox"
+                                name="agreeTerms"
+                                checked={formData.agreeTerms}
+                                onChange={handleChange}
+                                className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring focus:ring-blue-300"
+                            />
+                            <label className="ml-2 text-sm text-gray-700">I agree to the terms & conditions</label>
+                        </div>
+                        {errors.agreeTerms && <p className="text-red-500 text-sm">{errors.agreeTerms}</p>}
+
+                        <div className="mt-10">
+                            <button type="submit" className="bg-[#44448e] text-gray-100 p-4 w-full rounded-full tracking-wide
+                font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-[#272757]
+                shadow-lg">
+                                Register
+                            </button>
+                            <div className="mt-12 text-sm font-display font-semibold text-gray-700 text-center">
+                                Have an account?
+                                <span
+                                    onClick={handleSignIn}
+                                    className="ml-1 text-[#6868ac] hover:text-indigo-800 transition duration-200 cursor-pointer"
+                                >
+                                    Sign In
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+
                 </div>
+<
+                <div className="hidden lg:flex items-center justify-center bg-[#6868ac] flex-1">
+
+                    <div>
+                        <h1 className="text-white font-bold text-4xl font-sans">Mentoreshwar</h1>
+                        <p className="text-white mt-1">The most popular peer to peer Guidance</p>
+                    </div>
+
+
+                </div>
+=======
                 <div className="absolute -bottom-32 -left-40 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
                 <div className="absolute -bottom-40 -left-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
                 <div className="absolute -top-40 -right-0 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
@@ -251,8 +336,9 @@ export default function RegistrationForm() {
                         </span>
                     </div>
                 </form>
+
             </div>
-        </div>
+        </>
     );
 }
 

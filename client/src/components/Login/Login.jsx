@@ -56,12 +56,13 @@ export default function Login() {
 
 
   return (
-    <div className="container">
-      <div className="container flex flex-col lg:flex-row h-screen">
-        <div className="lg:w-1/2 xl:max-w-screen-sm">
-          <div className="py-12 bg-indigo-100 lg:bg-white flex justify-center lg:justify-start lg:px-12">
+    <>
+      <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-5">
+        <div className="m-auto w-full max-w-[540px] grid grid-cols-1 px-5 h-full md:py-20 py-10 lg:pl-5 ">
+
+          <div className="flex justify-center lg:justify-start">
             <div className="cursor-pointer flex items-center">
-              <svg className="w-10 h-10 stroke-current text-indigo-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 225 225">
+              <svg className="w-10  stroke-current text-[#44448e]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 225 225">
                 <g transform="matrix( 1, 0, 0, 1, 0,0)">
                   <g>
                     <path fill="none" stroke="currentColor" strokeWidth="10" strokeLinecap="round" strokeMiterlimit="3"
@@ -69,12 +70,14 @@ export default function Login() {
                   </g>
                 </g>
               </svg>
-              <div className="text-2xl text-indigo-800 tracking-wide ml-2 font-semibold">Welcome Back</div>
+              <div className="text-2xl text-[#272757] tracking-wide ml-2 font-semibold">Welcome Back</div>
             </div>
           </div>
+
           <ToastContainer />
-          <div className="mt-10 px-12 sm:px-24 md:px-48 lg:px-12 lg:mt-16 xl:px-24 xl:max-w-2xl">
-            <h2 className="text-center text-4xl text-indigo-900 font-display font-semibold lg:text-left xl:text-5xl xl:text-bold">Log in</h2>
+
+          <div className="mt-10 lg:mt-16 xl:max-w-2xl">
+            <h2 className="text-center text-4xl text-[#272757] font-display font-semibold lg:text-left xl:text-5xl xl:text-bold">Log in</h2>
             <form onSubmit={handleSubmit} className="mt-12 space-y-4">
               <div>
                 <label className="text-sm font-bold text-gray-700 tracking-wide">Email Address</label>
@@ -96,8 +99,8 @@ export default function Login() {
                   required placeholder="Enter your password" />
               </div>
               <div className="mt-10">
-                <button type="submit" className="bg-indigo-500 text-gray-100 p-4 w-full rounded-full tracking-wide
-                font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-indigo-600
+                <button type="submit" className="bg-[#44448e] text-gray-100 p-4 w-full rounded-full tracking-wide
+                font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-[#272757]
                 shadow-lg">
                   Log In
                 </button>
@@ -106,15 +109,14 @@ export default function Login() {
             <div className="mt-12 text-sm font-display font-semibold text-gray-700 text-center">
               Don't have an account?
               <span onClick={handleSignUp}
-                className="ml-1 text-indigo-600 hover:text-indigo-800 transition duration-200 cursor-pointer">
+                className="ml-1 text-[#6868ac] hover:text-indigo-800 transition duration-200 cursor-pointer">
                 Sign up
               </span>
             </div>
           </div>
-        </div>
 
-        {/* Right Side - SVG Image */}
-        <div className="hidden lg:flex items-center justify-center bg-indigo-100 flex-1">
+        </div>
+        <div className="hidden lg:flex items-center justify-center bg-[#6868ac] flex-1">
           <div className="max-w-xs transform duration-200 hover:scale-110 cursor-pointer">
             <svg className="w-5/6 mx-auto" xmlns="http://www.w3.org/2000/svg" id="f080dbb7-9b2b-439b-a118-60b91c514f72" data-name="Layer 1" viewBox="0 0 528.71721 699.76785">
               <title>Login</title>
@@ -150,11 +152,9 @@ export default function Login() {
             </svg>
           </div>
         </div>
+
       </div>
-    </div>
-
-
-
+    </>
   );
 
 }
