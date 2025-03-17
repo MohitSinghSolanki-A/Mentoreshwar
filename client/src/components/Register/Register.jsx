@@ -22,7 +22,6 @@ export default function RegistrationForm() {
 
     };
 
-    const [errors, setErrors] = useState({});
     const [otpSent, setOtpSent] = useState(false);
     const [otpVerified, setOtpVerified] = useState(false);
 
@@ -35,21 +34,32 @@ export default function RegistrationForm() {
     };
 
     const validateForm = () => {
-        const newErrors = {};
-        if (!formData.username) newErrors.username = "Username is required";
-        if (!formData.email) {
-            newErrors.email = "Email is required";
-        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-            newErrors.email = "Invalid email format";
+        if (!formData.username) {
+            toast.error("❌ Username is required");
+            return false;
         }
-        if (!formData.password) newErrors.password = "Password is required";
-        if (!formData.agreeTerms) newErrors.agreeTerms = "You must agree to terms";
-        if (!formData.otp) newErrors.otp = "OTP is required";
+        if (!formData.email) {
+            toast.error("❌ Email is required");
+            return false;
+        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+            toast.error("❌ Invalid email format");
+            return false;
+        }
+        if (!formData.password) {
+            toast.error("❌ Password is required");
+            return false;
+        }
+        if (!formData.agreeTerms) {
+            toast.error("❌ You must agree to the terms & conditions");
+            return false;
+        }
+        if (!formData.otp) {
+            toast.error("❌ OTP is required");
+            return false;
+        }
 
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
+        return true;
     };
-
 
 
     // Send OTP function
@@ -108,8 +118,11 @@ export default function RegistrationForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!validateForm() || !otpVerified) {
-            toast.error("Please verify OTP before registration.");
+
+        if (!validateForm()) return;
+
+        if (!otpVerified) {
+            toast.error("❌ Please verify your OTP before registration.");
             return;
         }
 
@@ -122,8 +135,7 @@ export default function RegistrationForm() {
 
             const data = await response.json();
             if (response.ok) {
-
-                toast.success("🎉 Registration successful! Please login.");
+                toast.success("🎉 Registration successful! Redirecting to login...");
                 setTimeout(() => navigate("/login"), 2000);
             } else {
                 toast.error(`❌ ${data.error}`);
@@ -133,6 +145,7 @@ export default function RegistrationForm() {
             toast.error("❌ Something went wrong. Try again!");
         }
     };
+
 
 
 
@@ -166,7 +179,7 @@ export default function RegistrationForm() {
                                 placeholder="Enter Username"
                                 value={formData.username}
                                 onChange={handleChange} />
-                            {errors.username && <p className="text-red-500 text-sm">{errors.username}</p>}
+
                         </div>
                         <div className="items-center py-2 mb-2">
                             <label className="text-sm font-bold text-gray-700 tracking-wide">Email Address</label>
@@ -176,7 +189,7 @@ export default function RegistrationForm() {
                                 value={formData.email}
                                 onChange={handleChange}
                                 placeholder="Email Address" />
-                            {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+
                             {!otpSent ? (
                                 <button type="button" onClick={sendOtp} className="ml-2 bg-blue-500 text-white px-3 py-1 rounded">
                                     Send OTP
@@ -207,7 +220,7 @@ export default function RegistrationForm() {
                                 value={formData.password}
                                 onChange={handleChange}
                                 placeholder="Enter Password" />
-                            {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
+
                         </div>
                         <div className="flex items-center mb-4">
                             <input
@@ -219,8 +232,6 @@ export default function RegistrationForm() {
                             />
                             <label className="ml-2 text-sm text-gray-700">I agree to the terms & conditions</label>
                         </div>
-                        {errors.agreeTerms && <p className="text-red-500 text-sm">{errors.agreeTerms}</p>}
-
                         <div className="mt-10">
                             <button type="submit" className="bg-[#44448e] text-gray-100 p-4 w-full rounded-full tracking-wide
                 font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-[#272757]

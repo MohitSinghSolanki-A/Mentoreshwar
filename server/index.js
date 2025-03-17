@@ -11,8 +11,6 @@ const uploadRoutes = require("./routes/uploadRoutes");
 const jobRoutes = require("./routes/Jobpostroute.js")
 
 
-
-
 dotenv.config();
 
 const app = express();
@@ -31,6 +29,7 @@ app.use("/api/call", emailRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/payment", paymentRoutes);
+
 
 app.listen(3001, () => console.log("Server running on port 3001"));
 connectDB();
