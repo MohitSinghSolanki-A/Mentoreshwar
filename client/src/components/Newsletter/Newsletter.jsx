@@ -5,6 +5,8 @@ import axios from "axios";
 export default function Newsletter() {
   const [email, setEmail] = useState("");
 
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+
   const handleSubscribe = async () => {
     if (!email) {
       alert("Please enter a valid email.");
@@ -12,7 +14,7 @@ export default function Newsletter() {
     }
 
     try {
-      const response = await axios.post("http://localhost:3001/api/call/subscribe", { email });
+      const response = await axios.post(`${API_BASE_URL}/api/call/subscribe`, { email });
       alert(response.data.message);
     } catch (error) {
       console.error("Subscription Error:", error);

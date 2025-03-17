@@ -1,7 +1,7 @@
 const Contact = require("../models/emailmodel");
 const transporter = require("../middleware/nodemailer")
 const crypto = require('crypto');
-const StudentNewsletter = require("../models/Subscribemodel.js").default;
+const StudentNewLetter = require("../models/Subscribemodel.js");
 
 const otpStore = {};
 
@@ -136,12 +136,12 @@ exports.SubscribeNewsletter = async (req, res) => {
             return res.status(400).json({ message: "Invalid email format." });
         }
 
-        const existingSubscription = await StudentNewsletter.findOne({ email }); // This should work now
+        const existingSubscription = await StudentNewLetter.findOne({ email });
         if (existingSubscription) {
             return res.status(409).json({ message: "Email already subscribed." });
         }
 
-        await StudentNewsletter.create({ email });
+        await StudentNewLetter.create({ email });
 
         res.status(201).json({ message: "Subscription successful!" });
     } catch (error) {

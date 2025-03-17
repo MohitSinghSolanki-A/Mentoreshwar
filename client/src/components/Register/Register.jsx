@@ -70,7 +70,7 @@ export default function RegistrationForm() {
         }
 
         try {
-            const response = await fetch(`http://localhost:3001/api/call/sendotp`, {
+            const response = await fetch(`${API_BASE_URL}/api/call/sendotp`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email: formData.email }),
@@ -97,7 +97,7 @@ export default function RegistrationForm() {
         }
 
         try {
-            const response = await fetch(`http://localhost:3001/api/call/verifyotp`, {
+            const response = await fetch(`${API_BASE_URL}/api/call/verifyotp`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email: formData.email, otp: formData.otp }),

@@ -4,6 +4,8 @@ import './contactus.css'
 import man from "../../assets/man-2.png"
 import { FaUser, FaEnvelope, FaPhone } from "react-icons/fa";
 
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const Contact = () => {
     const [formData, setFormData] = useState({
         name: "",
@@ -20,7 +22,7 @@ const Contact = () => {
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent form refresh
         try {
-            const response = await axios.post("http://localhost:3001/api/call/email", formData);
+            const response = await axios.post(`${API_BASE_URL}/api/call/email`, formData);
             setMessage(response.data.message);
             setFormData({ name: "", email: "", phone: "" });
         } catch (error) {
