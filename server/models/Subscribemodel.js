@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const studentNewsletterSchema = new mongoose.Schema({
     email: {
