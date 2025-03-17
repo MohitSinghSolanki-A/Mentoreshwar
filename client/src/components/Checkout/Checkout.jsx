@@ -37,7 +37,7 @@ const Checkout = () => {
         try {
             setLoading(true);
             setError(null);
-            const { data } = await axios.get(`http://localhost:3001/api/products/${id}`);
+            const { data } = await axios.get(`${API_BASE_URL}/api/products/${id}`);
 
             // Filter subjects based on selected subjects from localStorage
             const filteredSubjects = data.subjects.filter(subject => selectedSubjects.includes(subject.name));
@@ -64,7 +64,7 @@ const Checkout = () => {
             const amountInPaise = Math.round(discountedPrice * 100);
 
             const { data } = await axios.post(
-                `http://localhost:3001/api/payment/create-order`,
+                `${API_BASE_URL}/api/payment/create-order`,
                 {
                     userId,
                     productIds: [productId],
@@ -106,7 +106,7 @@ const Checkout = () => {
             handler: async (response) => {
                 try {
                     const { data } = await axios.post(
-                        `http://localhost:3001/api/payment/verify-payment`,
+                        `${API_BASE_URL}/api/payment/verify-payment`,
                         {
                             razorpay_order_id: response.razorpay_order_id,
                             razorpay_payment_id: response.razorpay_payment_id,
@@ -136,7 +136,7 @@ const Checkout = () => {
                         });
                         localStorage.setItem("purchasedCourses", JSON.stringify(purchasedCourses));
                         await axios.post(
-                            `http://localhost:3001/api/call/purchasemail`,
+                            `${API_BASE_URL}/api/call/purchasemail`,
                             {
                                 userId: localStorage.getItem("userId"),
                                 email: localStorage.getItem("email"),
@@ -149,7 +149,7 @@ const Checkout = () => {
                         );
 
                         await axios.post(
-                            `http://localhost:3001/api/auth/userUpdate`,
+                            `${API_BASE_URL}/api/auth/userUpdate`,
                             {
                                 userId: localStorage.getItem("userId"),
                                 address: formData.address,

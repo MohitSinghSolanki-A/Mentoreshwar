@@ -13,5 +13,4 @@ const studentNewsletterSchema = new mongoose.Schema({
     },
 });
 
-const StudentNewsletter = mongoose.model("StudentNewsletter", studentNewsletterSchema);
-export default StudentNewsletter;
+module.exports = mongoose.model("StudentNewLetter", studentNewsletterSchema);

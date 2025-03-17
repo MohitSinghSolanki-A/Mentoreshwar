@@ -10,6 +10,8 @@ export default function Products() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+
   useEffect(() => {
     setIsAuthenticated(localStorage.getItem("isAuthenticated") === "true");
     fetchProducts();
@@ -17,7 +19,7 @@ export default function Products() {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch("http://localhost:3001/api/products");
+      const response = await fetch(`${API_BASE_URL}/api/products`);
       if (!response.ok) throw new Error("Failed to fetch products");
       const data = await response.json();
       setProducts(data);

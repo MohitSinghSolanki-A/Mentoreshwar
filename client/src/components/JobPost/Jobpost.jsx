@@ -21,7 +21,7 @@ const JobForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:3001/api/job", jobData);
+            const response = await axios.post(`${API_BASE_URL}/api/job`, jobData);
             setMessage("Job posted successfully!");
             setJobData({ logo: "", companyName: "", category: "", description: "", applyLink: "" });
             console.log(response)

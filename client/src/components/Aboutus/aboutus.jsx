@@ -46,8 +46,6 @@ const AboutUs = () => {
                     </div>
                 </div>
 
-
-                {/* Why Choose Us Section */}
                 <div className="mt-16">
                     <h2 className="text-3xl font-bold text-gray-800 text-center mb-8">Why Choose Mentoreshwar?</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
