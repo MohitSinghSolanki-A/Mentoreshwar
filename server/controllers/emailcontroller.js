@@ -1,6 +1,8 @@
 const Contact = require("../models/emailmodel");
 const transporter = require("../middleware/nodemailer")
 const crypto = require('crypto');
+const StudentNewsletter = require("../models/Subscribemodel.js").default;
+
 const otpStore = {};
 
 exports.submitContactForm = async (req, res) => {
@@ -121,5 +123,29 @@ exports.verifyOTP = (req, res) => {
         res.json({ message: "OTP verified! Proceed with registration." });
     } else {
         res.status(400).json({ error: "Invalid or expired OTP" });
+    }
+};
+
+
+exports.SubscribeNewsletter = async (req, res) => {
+    try {
+
+        const { email } = req.body;
+
+        if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+            return res.status(400).json({ message: "Invalid email format." });
+        }
+
+        const existingSubscription = await StudentNewsletter.findOne({ email }); // This should work now
+        if (existingSubscription) {
+            return res.status(409).json({ message: "Email already subscribed." });
+        }
+
+        await StudentNewsletter.create({ email });
+
+        res.status(201).json({ message: "Subscription successful!" });
+    } catch (error) {
+        console.error("Subscription error:", error);
+        res.status(500).json({ message: "Server error. Try again later." });
     }
 };

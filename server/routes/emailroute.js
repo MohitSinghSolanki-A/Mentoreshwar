@@ -1,5 +1,5 @@
 const express = require("express");
-const { submitContactForm, sendPurchaseConfirmation, sendOTP, verifyOTP } = require("../controllers/emailcontroller");
+const { submitContactForm, sendPurchaseConfirmation, sendOTP, verifyOTP, SubscribeNewsletter } = require("../controllers/emailcontroller");
 
 const router = express.Router();
 
@@ -8,5 +8,6 @@ router.post("/email", submitContactForm);
 router.post("/purchasemail", sendPurchaseConfirmation)
 router.post("/sendotp", sendOTP)
 router.post("/verifyotp", verifyOTP)
+router.post("/subscribe", SubscribeNewsletter)
 
 module.exports = router;

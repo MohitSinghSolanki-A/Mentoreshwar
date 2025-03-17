@@ -160,14 +160,16 @@ export default function Navbar() {
                     Contact Us
                   </Link>
 
-                  <Link
-                    to="/job"
-                    className="text-base font-normal font-![mulish] hover:text-[#272757]"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    Opportunities
-                  </Link>
+                  {isLoggedIn && (
+                    <Link
+                      to="/job"
+                      className="text-base font-normal font-![mulish] hover:text-[#272757]"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      Opportunities
+                    </Link>
 
+                  )}
                   {isSetpostjob && (
                     <Link
                       to="/job_post"
