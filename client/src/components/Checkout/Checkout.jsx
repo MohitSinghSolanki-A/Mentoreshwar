@@ -18,6 +18,8 @@ const Checkout = () => {
     const [error, setError] = useState(null);
     const [formData, setFormData] = useState({ address: "", phone: "", attempt: "", username: "" });
     const [isFormValid, setIsFormValid] = useState(false);
+    const [isProcessing, setIsProcessing] = useState(false);
+
 
     useEffect(() => {
         if (productId) {
@@ -104,6 +106,7 @@ const Checkout = () => {
             currency: "INR",
             order_id: orderId,
             handler: async (response) => {
+                setIsProcessing(true);
                 try {
                     const { data } = await axios.post(
                         `${API_BASE_URL}/api/payment/verify-payment`,
@@ -171,7 +174,7 @@ const Checkout = () => {
                     console.error("Verification Error:", error);
                     toast("❌ Error verifying payment. Please try again.");
                 } finally {
-                    setLoading(false);
+                    setIsProcessing(false);
                 }
             },
         };
@@ -188,6 +191,12 @@ const Checkout = () => {
 
     return (
         <div className="flex flex-col lg:flex-row min-h-screen bg-gray-100">
+            {isProcessing && (
+                <div className="fixed inset-0 flex items-center justify-center bg-transparent bg-opacity-50 z-50">
+                    <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12"></div>
+                    <p className="text-black mt-2">Processing payment...</p>
+                </div>
+            )}
 
             <div className="w-full lg:w-2/3 h-auto lg:h-screen bg-white shadow-lg p-6 lg:p-8 flex flex-col justify-center">
                 <h2 className="text-3xl font-semibold mb-6 text-gray-800">📌 Enter Your Details</h2>
