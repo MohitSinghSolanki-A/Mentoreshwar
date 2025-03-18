@@ -1,4 +1,5 @@
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from 'react-icons/fa';
+import Logo from "../../../src/assets/logo-white.svg"
 
 export default function Footer() {
   return (
@@ -7,7 +8,7 @@ export default function Footer() {
         <footer className="footer-container px-4 md:px-10 py-6 w-full">
           <div className="flex flex-wrap md:flex-nowrap w-full justify-between">
             <div className="p-5 space-y-3 w-full md:w-auto">
-              <h1 className="text-white font-bold text-4xl">Mentoreshwar</h1>
+              <img src={Logo} alt="Mentoreshwar" width={210} />
               <h2 className='text-xl font-[mulish] text-white'>About Us</h2>
               <p className='text-sm font-[mulish] text-white'>We are dedicated to providing the best services to our customers.</p>
             </div>

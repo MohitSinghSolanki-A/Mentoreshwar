@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaXmark } from "react-icons/fa6";
 import { MdMenu } from "react-icons/md";
 // import { toast } from "react-toastify";
-import Logo from "../assets/logo.svg"
+import Logo from "../assets/logo-black.svg"
 
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -87,7 +87,7 @@ export default function Navbar() {
 
               {/* Logo */}
               <Link to="/" className="text-2xl font-![mulish] font-bold">
-                Mentoreshwar
+                <img src={Logo} alt="Mentoreshwar" width={210} />
               </Link>
 
               {/* Mobile Menu Icon (Visible on md and below) */}
