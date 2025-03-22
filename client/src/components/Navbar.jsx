@@ -160,6 +160,14 @@ export default function Navbar() {
                     Contact Us
                   </Link>
 
+                  <Link
+                    to="/free_resources"
+                    className="text-base font-normal font-![mulish] hover:text-[#272757]"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    Resources
+                  </Link>
+
                   {isLoggedIn && (
                     <Link
                       to="/job"
@@ -167,6 +175,16 @@ export default function Navbar() {
                       onClick={() => setMenuOpen(false)}
                     >
                       Opportunities
+                    </Link>
+
+                  )}
+                  {isSetpostjob && (
+                    <Link
+                      to="/resources"
+                      className="text-base font-normal font-![mulish] hover:text-[#272757]"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      Add Resources
                     </Link>
 
                   )}

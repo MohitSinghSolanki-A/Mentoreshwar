@@ -14,6 +14,11 @@ import Mentorship from "./components/Mentorships/Mentorship";
 import TestSeries from "./components/Testseries/TestSeries";
 import JobList from "./components/Job/Jobpost"
 import JobForm from "./components/JobPost/Jobpost"
+import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy.jsx";
+import Can_Ref from "./components/Canc&Ref/CanRef.jsx";
+import Terms from "./components/T&C/T&C.jsx";
+import Resources from "./components/Resources/Resources.jsx";
+import FreeResources from "./components/Resources/FreeResources.jsx";
 
 
 export default function App() {
@@ -56,6 +61,11 @@ export default function App() {
               <Route path="/testseries" element={<TestSeries />} />
               <Route path="/job" element={<JobList />} />
               <Route path="/job_post" element={<JobForm />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/Refund" element={<Can_Ref />} />
+              <Route path="/Terms" element={<Terms />} />
+              <Route path="/resources" element={<Resources />} />
+              <Route path="/free_resources" element={<FreeResources />} />
             </Routes>
           </div>
         </div>

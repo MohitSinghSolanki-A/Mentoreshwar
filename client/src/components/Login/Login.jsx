@@ -20,7 +20,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+      const response = await fetch(`http://localhost:3001/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -36,7 +36,7 @@ export default function Login() {
         localStorage.setItem('email', data.email)
         localStorage.setItem("isAuthenticated", "true");
 
-        if (formData.email === "admin@gmail.com") {
+        if (formData.email === "mohit.solanki@allen.in") {
           localStorage.setItem("setpostJob", "true");
         }
 
@@ -46,7 +46,7 @@ export default function Login() {
           window.location.href = "/"
         }, 2000);
       } else {
-        toast.error("❌ Login failed!", { position: "top-right" });
+        toast.error("❌ Incorrect Username or Password!", { position: "top-right" });
       }
     } catch (error) {
       console.error(error);
