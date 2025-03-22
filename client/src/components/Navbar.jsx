@@ -160,13 +160,15 @@ export default function Navbar() {
                     Contact Us
                   </Link>
 
-                  <Link
-                    to="/free_resources"
-                    className="text-base font-normal font-![mulish] hover:text-[#272757]"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    Resources
-                  </Link>
+                  {isLoggedIn && (
+                    <Link
+                      to="/free_resources"
+                      className="text-base font-normal font-![mulish] hover:text-[#272757]"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      Resources
+                    </Link>
+                  )}
 
                   {isLoggedIn && (
                     <Link

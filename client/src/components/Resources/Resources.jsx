@@ -8,6 +8,8 @@ export default function Resources() {
     const [message, setMessage] = useState("");
     const [downloadUrl, setDownloadUrl] = useState("");
 
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+
     const handleUpload = async (e) => {
         e.preventDefault();
         if (!file) return alert("Please select a file");
@@ -18,7 +20,7 @@ export default function Resources() {
         formData.append("file", file);
 
         try {
-            const res = await axios.post("http://localhost:3001/api/resource/upload", formData, {
+            const res = await axios.post(`${API_BASE_URL}/api/resource/upload`, formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
 
