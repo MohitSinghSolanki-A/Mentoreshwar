@@ -18,7 +18,7 @@ exports.upload = async (req, res) => {
 
         // Save to DB
         const newSubmission = new Submission({
-            userId: req.body.userId, // Ensure frontend sends `studentId`
+            userId: req.body.userId,
             pdfUrl: result.secure_url,
         });
 

@@ -10,6 +10,7 @@ const emailRoutes = require("./routes/emailroute.js");
 const uploadRoutes = require("./routes/uploadRoutes");
 const jobRoutes = require("./routes/Jobpostroute.js")
 const healthRoute = require("./routes/healthroute.js");
+const ResourceRoute = require("./routes/resourceupload.js")
 
 
 dotenv.config();
@@ -32,7 +33,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/payment", paymentRoutes);
 app.use('/api/', healthRoute);
-
+app.use('/api/resource', ResourceRoute)
 
 app.listen(3001, () => console.log("Server running on port 3001"));
 connectDB();

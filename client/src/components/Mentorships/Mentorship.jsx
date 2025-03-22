@@ -88,9 +88,9 @@ const MentorshipServices = () => {
                                 ))}
                             </ul>
 
-                            <button className="px-4 py-2 text-sm font-medium text-white bg-[#44448E] rounded-full transition hover:bg-[#44448E]">
+                            {/* <button className="px-4 py-2 text-sm font-medium text-white bg-[#44448E] rounded-full transition hover:bg-[#44448E]">
                                 Learn More
-                            </button>
+                            </button> */}
                         </motion.div>
                     ))}
                 </div>
