@@ -22,7 +22,7 @@ export default function App() {
       <Router>
         <div>
           <Navbar />
-          <div className="mt-[72px]">
+          <div className="mt-[80px]">
 
             <ToastContainer
               position="top-right"

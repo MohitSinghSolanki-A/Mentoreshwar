@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { FaEnvelope } from "react-icons/fa6";
 import axios from "axios";
+import { toast } from "react-toastify"
 
 export default function Newsletter() {
   const [email, setEmail] = useState("");
@@ -9,16 +10,16 @@ export default function Newsletter() {
 
   const handleSubscribe = async () => {
     if (!email) {
-      alert("Please enter a valid email.");
+      toast.error("Please enter a valid email.");
       return;
     }
 
     try {
       const response = await axios.post(`${API_BASE_URL}/api/call/subscribe`, { email });
-      alert(response.data.message);
+      toast.success(response.data.message || "Subscription successful");
     } catch (error) {
-      console.error("Subscription Error:", error);
-      alert(error.response?.data?.message || "Subscription failed.");
+      
+      toast.error(error.response?.data?.message || "Subscription failed.");
     }
   };
 
@@ -46,7 +47,7 @@ export default function Newsletter() {
               Stay updated with our latest news and offers!
             </p>
 
-            <div className="flex gap-3 items-center">
+            <div className="md:flex gap-3 items-center md:relative flex-col">
               <input
                 type="email"
                 placeholder="Enter your email"
@@ -56,7 +57,7 @@ export default function Newsletter() {
               />
               <button
                 onClick={handleSubscribe}
-                className="bg-[#44448e] text-white font-semibold py-3 px-6 rounded-full transition-all duration-300 ease-in-out shadow-md hover:shadow-lg"
+                className="bg-[#44448e] text-white font-semibold py-3 px-6 rounded-full transition-all duration-300 ease-in-out shadow-md hover:shadow-lg md:absolute md:right-2.5 md:top-[9px] md:w-32 w-full md:mt-0 mt-4"
               >
                 Subscribe
               </button>
