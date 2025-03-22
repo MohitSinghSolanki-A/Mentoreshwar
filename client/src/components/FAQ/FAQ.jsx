@@ -30,7 +30,7 @@ export default function FAQ() {
           <div key={index} className='mb-6'>
             <div
               onClick={() => toggleAccordion(index)}
-              className={`bg-[#44448e] ${openIndex === index ? "active" : ""} text-white flex justify-between items-center lg:w-3xl md:w-2xl w-72 px-2.5 py-5 rounded-xl`}
+              className={`bg-[#44448e] ${openIndex === index ? "active" : ""} text-white flex justify-between items-center lg:w-3xl md:w-2xl w-full px-2.5 py-5 rounded-xl`}
               aria-expanded={openIndex === index}
               role="button"
               tabIndex="0"
@@ -45,7 +45,7 @@ export default function FAQ() {
             </div>
             {openIndex === index && (
               <div
-                className={`transition-all lg:w-3xl md:w-2xl w-72 duration-300 ease-in-out ${openIndex === index ? "max-h-[1000px] p-4" : "max-h-0 overflow-hidden"
+                className={`transition-all lg:w-3xl md:w-2xl w-full duration-300 ease-in-out ${openIndex === index ? "max-h-[1000px] p-4" : "max-h-0 overflow-hidden"
                   }`}
               >
                 <p>{faq.answer}</p>
