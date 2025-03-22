@@ -32,6 +32,7 @@ export default function Footer() {
                 <a href="/aboutus" className='text-sm font-[mulish] text-white hover:underline'>About Us</a>
                 <a href="/contact" className='text-sm font-[mulish] text-white hover:underline'>Contact Us</a>
                 {isLoggedIn && <a href="/job" className='text-sm font-[mulish] text-white hover:underline'>Opportunities</a>}
+                {isLoggedIn && <a href="/free_resources" className='text-sm font-[mulish] text-white hover:underline'>Resources</a>}
 
               </div>
 
