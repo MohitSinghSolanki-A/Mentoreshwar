@@ -92,7 +92,7 @@ const Contact = () => {
                         </div>
                     </div>
                     <div className="flex justify-center items-end">
-                        <img src={man} alt="Contact Us" className="contact-image h-auto lg:w-[400px] w-3xs" />
+                        <img src={man} alt="Contact Us" className="contact-image h-auto lg:w-[400px] w-96" />
                     </div>
                 </div>
 
